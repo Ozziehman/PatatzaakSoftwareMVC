@@ -19,6 +19,14 @@ namespace PatatzaakSoftwareMVC.Models.ObjectModels
         public float Price { get; set; }
         public float? Discount { get; set; }
 
+        public Item(string name, string imagePath, float price, float? discount)
+        {
+            Name = name;
+            ImagePath = imagePath;
+            Price = price;
+            Discount = discount;
+        }
+
         public void CreateOrderedItem()
         {
 

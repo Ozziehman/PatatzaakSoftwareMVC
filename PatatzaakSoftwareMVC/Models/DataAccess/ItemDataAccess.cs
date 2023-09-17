@@ -1,6 +1,9 @@
 ﻿
-
-
+using PatatzaakSoftwareMVC.Models.ObjectModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace PatatzaakSoftwareMVC.Models.DataAccess
 {
@@ -8,9 +11,11 @@ namespace PatatzaakSoftwareMVC.Models.DataAccess
     {
         public static string AddItem()
         {
-            Console.WriteLine("Added Item");
-            return "Added Item";
+            Item newItem = new Item("Patat", "../Resources/Images/placeholder.jpg", 1.50f, null);   
 
+            return $"added item {newItem.Name}";
+
+            //THIS IS AN EXAMPLE OF HOW TO USE THE DATA ACCESS LAYER
         }
 
         public static void RemoveItem()
