@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace PatatzaakSoftware.Models
+namespace PatatzaakSoftwareMVC.Models.ObjectModels
 {
     public class OrderedItem
     {
