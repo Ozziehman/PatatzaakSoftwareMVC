@@ -21,12 +21,12 @@ namespace PatatzaakSoftwareMVC.Controllers
 
         public IActionResult CustomerPage()
         {
-            return View("~/Views/Home/CustomerPage.cshtml");
+            return View("~/Views/Customer/CustomerPage.cshtml");
         }
 
         public IActionResult CompanyPage()
         {
-            return View("~/Views/Home/CompanyPage.cshtml");
+            return View("~/Views/Company/CompanyPage.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
