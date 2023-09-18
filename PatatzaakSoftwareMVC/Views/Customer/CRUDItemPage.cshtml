@@ -1,11 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-
-}
-
-<html>
+﻿<html>
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" />
@@ -14,20 +7,57 @@
     <script src="../js/script.js"></script>
     <title>Customer page</title>
 </head>
-<body>
-    <div>
-        <a asp-area="" asp-controller="Item" asp-action="CreateItem" class="btn">Create Item</a>
-    </div>
-    <div>
-        <form method="post" action="/Item/ProcessEditForm">
-            <div>
-                <label for="ItemToEditId">Item ID:</label>
-                <input type="text" name="ItemToEditId" id="ItemToEditId" required />
-            </div>
-            <button type="submit" class="btn">Edit Item</button>
-        </form>
-    </div>
-    
-</body>
+<body style="margin-top: 10%">
+    <h1>CRUD functionality page for Item</h1>
+    <div class="container">
+        @* Create Item (CREATE) *@
+        <div class="row justify-content-center align-items-center p-1">
+            <a asp-area="" asp-controller="Item" asp-action="CreateItem" class="btn">Create Item</a>
+        </div>
+        <label>_________________________________________________________________________________________________________________</label>
+        @* Load Item (READ) *@
+        <div class="row justify-content-center align-items-center p-1">
+            <form method="post" action="/Item/ProcessLoadForm">
+                <div class="col-md-4">
+                    <label for="ItemToLoadId">Item ID:</label>
+                    <input type="text" name="ItemToLoadId" id="ItemToLoadId" required />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn">Load Item</button>
+                </div>
+            </form>
+        </div>
 
+        <div class="row justify-content-center align-items-center p-1">
+            <a asp-area="" asp-controller="Item" asp-action="LoadAllItemsAsJson" class="btn">Load All Items</a>
+        </div>
+        <label>_________________________________________________________________________________________________________________</label>
+        @* Edit Item (UPDATE) *@
+        <div class="row justify-content-center align-items-center p-1">
+            <form method="post" action="/Item/ProcessEditForm">
+                <div class="col-md-4">
+                    <label for="ItemToEditId">Item ID:</label>
+                    <input type="text" name="ItemToEditId" id="ItemToEditId" required />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn">Edit Item</button>
+                </div>
+            </form>
+        </div>
+        <label>_________________________________________________________________________________________________________________</label>
+        @* Remove Item (DELETE)*@
+        <div class="row justify-content-center align-items-center p-1">
+            <form method="post" action="/Item/ProcessDeletionForm">
+                <div class="col-md-4">
+                    <label for="ItemToDeleteId">Item ID:</label>
+                    <input type="text" name="ItemToDeleteId" id="ItemToDeleteId" required />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn">Delete Item</button>
+                </div>
+            </form>
+        </div>
+        <label>_________________________________________________________________________________________________________________</label>
+    </div>
+</body>
 </html>

@@ -1,0 +1,21 @@
+﻿@model string
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Item JSON Data</title>
+</head>
+<body>
+    <h1>Item JSON Data</h1>
+
+    @if (!string.IsNullOrEmpty(Model))
+    {
+        <pre>@Html.Raw(Model)</pre>
+    }
+    else
+    {
+        <p>Item not found.</p>
+    }
+</body>
+</html>
