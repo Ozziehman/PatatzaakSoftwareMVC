@@ -7,7 +7,7 @@
     <script src="../js/script.js"></script>
     <title>Customer page</title>
 </head>
-<body style="margin-top: 10%">
+<body style="margin-top: 8%">
     <h1>CRUD functionality page for Item</h1>
     <div class="container">
         <label>__________________________________________________________________________________________________________________________________________________________________</label>
@@ -33,7 +33,9 @@
         <div class="row justify-content-center align-items-center p-1">
             <a asp-area="" asp-controller="Item" asp-action="LoadAllItemsAsJson" class="btn">Load All Items</a>
         </div>
+        
         <label>__________________________________________________________________________________________________________________________________________________________________</label>        @* Edit Item (UPDATE) *@
+        @* Edit Item (UPDATE) *@
         <div class="row justify-content-center align-items-center p-1">
             <form method="post" action="/Item/ProcessEditForm">
                 <div class="col-md-4">
@@ -46,6 +48,7 @@
             </form>
         </div>
         <label>__________________________________________________________________________________________________________________________________________________________________</label>        @* Remove Item (DELETE)*@
+        @* 'Remove Item (DELETE) *@
         <div class="row justify-content-center align-items-center p-1">
             <form method="post" action="/Item/ProcessDeletionForm">
                 <div class="col-md-4">
