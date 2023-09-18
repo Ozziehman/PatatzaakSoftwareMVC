@@ -19,15 +19,6 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
-        public IActionResult CustomerPage()
-        {
-            return View("~/Views/Customer/CustomerPage.cshtml");
-        }
-
-        public IActionResult CompanyPage()
-        {
-            return View("~/Views/Company/CompanyPage.cshtml");
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" />
+    <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/mainStyle.css" />
+    <script src="../js/script.js"></script>
+    <title>Customer page</title>
+</head>
+<body>
+    <div>
+        <a asp-area="" asp-controller="Item" asp-action="CreateItem" class="btn">Create Item</a>
+    </div>
+    <div>
+        <form method="post" action="/Item/ProcessEditForm">
+            <div>
+                <label for="ItemToEditId">Item ID:</label>
+                <input type="text" name="ItemToEditId" id="ItemToEditId" required />
+            </div>
+            <button type="submit" class="btn">Edit Item</button>
+        </form>
+    </div>
+    
+</body>
+
+</html>

@@ -16,5 +16,6 @@ namespace PatatzaakSoftwareMVC.Models
 
         [Required]
         public Order? Order { get; set; }
+
     }
 }

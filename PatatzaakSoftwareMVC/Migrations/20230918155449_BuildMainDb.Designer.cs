@@ -12,7 +12,7 @@ using PatatzaakSoftwareMVC.Data;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     [DbContext(typeof(MainDb))]
-    [Migration("20230918124235_BuildMainDb")]
+    [Migration("20230918155449_BuildMainDb")]
     partial class BuildMainDb
     {
         /// <inheritdoc />
@@ -162,7 +162,7 @@ namespace PatatzaakSoftwareMVC.Migrations
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Order", b =>
                 {
                     b.HasOne("PatatzaakSoftwareMVC.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -179,7 +179,7 @@ namespace PatatzaakSoftwareMVC.Migrations
                         .IsRequired();
 
                     b.HasOne("PatatzaakSoftwareMVC.Models.Order", "Order")
-                        .WithMany()
+                        .WithMany("OrderedItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -192,12 +192,24 @@ namespace PatatzaakSoftwareMVC.Migrations
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Voucher", b =>
                 {
                     b.HasOne("PatatzaakSoftwareMVC.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("vouchers")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Customer", b =>
+                {
+                    b.Navigation("orders");
+
+                    b.Navigation("vouchers");
+                });
+
+            modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Order", b =>
+                {
+                    b.Navigation("OrderedItems");
                 });
 #pragma warning restore 612, 618
         }

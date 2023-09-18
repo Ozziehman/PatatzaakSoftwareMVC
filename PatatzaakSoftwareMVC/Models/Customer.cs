@@ -21,5 +21,8 @@ namespace PatatzaakSoftwareMVC.Models
 
         public int? Points { get; set; }
 
+        public List<Order>? orders { get; set; }
+        public List<Voucher>? vouchers { get; set; }
+
     }
 }

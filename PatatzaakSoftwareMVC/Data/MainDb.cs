@@ -14,8 +14,16 @@ namespace PatatzaakSoftwareMVC.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connection = "Data Source=LAPTOPOSCARTHEE\\MSSQLSERVER02;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=Yes";
+            //PC
+            string connection = "Server=localhost\\MSSQLSERVER02;Database=master;Trusted_Connection=True;TrustServerCertificate=Yes";
+            //_______
+            //Laptop
+            //string connection = "Data Source=LAPTOPOSCARTHEE\\MSSQLSERVER02;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=Yes";
+            //_______
             optionsBuilder.UseSqlServer(connection);
         }
     }
 }
+
+
+
