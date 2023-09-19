@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="PatatzaakSoftwareMVC.Models.Customer">
-    <Position X="10.25" Y="1.75" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAAAABAEAAgAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Customer.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="vouchers" />
-      <Property Name="orders" />
-    </ShowAsCollectionAssociation>
-  </Class>
   <Class Name="PatatzaakSoftwareMVC.Models.Item">
     <Position X="3.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
@@ -24,7 +10,7 @@
   <Class Name="PatatzaakSoftwareMVC.Models.Order">
     <Position X="7" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAESAQAAAAAQAAAAABQAAAAAAAAAQAAAAAAAAAAACAA=</HashCode>
+      <HashCode>CAASAQAAAQAQAAAAABQAAAAQAAQgQAAAAAAAAAAACQA=</HashCode>
       <FileName>Models\Order.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -38,30 +24,29 @@
       <FileName>Models\OrderedItem.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Order" />
       <Property Name="Item" />
+      <Property Name="Order" />
     </ShowAsAssociation>
   </Class>
   <Class Name="PatatzaakSoftwareMVC.Models.Voucher">
-    <Position X="9.75" Y="5" Width="1.5" />
+    <Position X="7" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAECCAAAAQAAAAAAAAAgAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AAACCAAAAQAAAAAAAAAgAAAAAAAAAAAAAAAAAAIAAQA=</HashCode>
       <FileName>Models\Voucher.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="PatatzaakSoftwareMVC.Models.Administrator">
-    <Position X="13" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Administrator.cs</FileName>
-    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="user" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="PatatzaakSoftwareMVC.Models.User">
-    <Position X="13" Y="1.5" Width="1.5" />
+    <Position X="11.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAACAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAEKAAAIAWAAggAAAAACAAQACAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Models\User.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -28,137 +28,74 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/DataViews/ItemModelTest.cshtml");
         }
 
-
-
-
-
-
-
         //CREATE
-        public IActionResult CreateItem(string Name, float Price, float Discount)
+        public IActionResult CreateItem()
         {
-            using (var dbContext = new MainDb())
+            Item item = new Item()
             {
-                var item = new Item
-                {
-                    Name = "testItem",
-                    Price = 1.00f,
-                    Discount = 0.00f
-                };
-
-                dbContext.items.Add(item);
-                dbContext.SaveChanges();
+                //Data should be entered into here, maybe use HttpContext.Request.Form[""] to get data from form
+                Name= "TestItem",
+                Price = 1.00f,
+                Discount = 0.00f,
+                ImagePath = "../Resources/Images/placeholder.jpg"
+            };
+ 
+            if (item.CreateItem(item) > 0)
+            {
+                _logger.LogInformation("Item created");
             }
-            _logger.LogInformation("Item created");
+            else
+            {
+                _logger.LogInformation("Item not created");
+            }
             return View("~/Views/Customer/CRUDItemPage.cshtml");
         }
-
 
         //READ
         public IActionResult ProcessLoadForm()
         {
             string itemToLoadId = HttpContext.Request.Form["ItemToLoadId"];
-
-            using (var dbContext = new MainDb())
-            {
-                var itemToLoad = dbContext.items.Where(item => item.Id == int.Parse(itemToLoadId)).FirstOrDefault();
-
-                if (itemToLoad != null)
-                {
-                    _logger.LogInformation("Item loaded");
-                    var jsonItem = JsonConvert.SerializeObject(itemToLoad, Formatting.Indented); // Convert to json
-                    return View("~/Views/DataViews/ItemJsonDataView.cshtml", jsonItem); // Go to new page wit json data
-                }
-                else
-                {
-                    _logger.LogInformation("Item not found");
-                    return View("~/Views/Customer/CRUDItemPage.cshtml");
-                }
-            }
+            return View("~/Views/DataViews/ItemJsonDataView.cshtml", new Item().LoadItemById(int.Parse(itemToLoadId)));
         }
+        
         public IActionResult LoadAllItemsAsJson()
-        {
-            using (var dbContext = new MainDb())
-            {
-                var itemsToLoad = dbContext.items.ToList(); // Load all items
-
-                if (itemsToLoad.Count > 0)
-                {
-                    _logger.LogInformation("Items loaded");
-                    var jsonItems = JsonConvert.SerializeObject(itemsToLoad, Formatting.Indented); // Convert to JSON
-                    return View("~/Views/DataViews/ItemJsonDataView.cshtml", jsonItems); // Go to new page with JSON data
-                }
-                else
-                {
-                    _logger.LogInformation("No items found");
-                    return View("~/Views/Customer/CRUDItemPage.cshtml");
-                }
-            }
+        {           
+            return View("~/Views/DataViews/ItemJsonDataView.cshtml", new Item().LoadItems());
         }
 
         public IActionResult LoadItemsAsObjects()
-        {
-
-            using (MainDb dbContext = new MainDb())
-            {
-                var items = dbContext.items.ToList();
-                foreach (Item item in items)
-                {
-                    _logger.LogInformation($"Item loaded: {item.Name}");
-                }
-                return View("~/Views/DataViews/ItemObjectDataView.cshtml", items);
-            }
+        {        
+            return View("~/Views/DataViews/ItemObjectDataView.cshtml", new Item().LoadItemsObject());      
         }
-
 
         //UPDATE
         public IActionResult ProcessEditForm()
         {
             string itemToEditId = HttpContext.Request.Form["ItemToEditId"];
-
-            using (var dbContext = new MainDb())
+            if (new Item().EditItemById(int.Parse(itemToEditId)) > 0)
             {
-                var itemToEdit = dbContext.items.Where(item => item.Id == int.Parse(itemToEditId)).FirstOrDefault();
-
-                if (itemToEdit != null)
-                {
-                    //THIS IS AN EXAMPLE EDIT
-                    itemToEdit.Name = "EditedItem";
-
-                    dbContext.SaveChanges();
-                    _logger.LogInformation("Item edited");
-                }
-                else
-                {
-                    _logger.LogInformation("Item not found");
-                }
+                _logger.LogInformation("item found and edited");
             }
+            else
+            {
+                _logger.LogInformation("item not found/edit failed/No actual change entered");
+            }
+                
             return View("~/Views/Customer/CRUDItemPage.cshtml");
         }
-
-
 
         //DELETE
         public IActionResult ProcessDeletionForm()
         {
             string itemToDeleteId = HttpContext.Request.Form["ItemToDeleteId"];
 
-            using (var dbContext = new MainDb())
+            if (new Item().DeleteItemById(int.Parse(itemToDeleteId)) > 0)
             {
-                var itemToDelete = dbContext.items.Where(item => item.Id == int.Parse(itemToDeleteId)).FirstOrDefault();
-
-                if (itemToDelete != null)
-                {
-                    //THIS IS AN EXAMPLE EDIT
-                    dbContext.items.Remove(itemToDelete);
-
-                    dbContext.SaveChanges();
-                    _logger.LogInformation("Deleted");
-                }
-                else
-                {
-                    _logger.LogInformation("Item not found");
-                }
+                _logger.LogInformation("item found and deleted");
+            }
+            else
+            {
+                _logger.LogInformation("item not found/delete failed");
             }
             return View("~/Views/Customer/CRUDItemPage.cshtml");
         }

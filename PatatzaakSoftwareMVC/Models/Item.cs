@@ -1,4 +1,6 @@
-﻿using PatatzaakSoftwareMVC.Data;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using Newtonsoft.Json;
+using PatatzaakSoftwareMVC.Data;
 using System.ComponentModel.DataAnnotations;
 
 namespace PatatzaakSoftwareMVC.Models
@@ -18,7 +20,7 @@ namespace PatatzaakSoftwareMVC.Models
         public float Price { get; set; }
 
         public float? Discount { get; set; }
-
+   
         public void CreateOrderedItem()
         {
 
@@ -27,24 +29,101 @@ namespace PatatzaakSoftwareMVC.Models
         {
 
         }
-        public void CreateItem()
+        public int CreateItem(Item item)
+        {
+            using (var dbContext = new MainDb())
+            {
+                dbContext.items.Add(item);
+                int result = dbContext.SaveChanges();
+
+                return result;
+            }
+        }
+        public string LoadItems()
+        {
+            using (var dbContext = new MainDb())
+            {
+                var itemsToLoad = dbContext.items.ToList(); // Load all items
+
+                if (itemsToLoad.Count > 0)
+                {
+                    var jsonItems = JsonConvert.SerializeObject(itemsToLoad, Formatting.Indented); // Convert to JSON
+                    return jsonItems; // Go to new page with JSON data
+                }
+                else
+                {
+                    return "No items found";
+                }
+            }
+        }
+        //TEST
+        public List<Item> LoadItemsObject() 
         {
 
+            using (MainDb dbContext = new MainDb())
+            {
+                var items = dbContext.items.ToList();
+                return items;
+            }
         }
-        public void LoadItems()
+
+        public string LoadItemById(int itemToLoadId)
         {
+            using (var dbContext = new MainDb())
+            {
+                var itemToLoad = dbContext.items.Where(item => item.Id == itemToLoadId).FirstOrDefault();
+
+                if (itemToLoad != null)
+                {
+                    var jsonItem = JsonConvert.SerializeObject(itemToLoad, Formatting.Indented); // Convert to json
+                    return jsonItem; // Go to new page wit json data
+                }
+                else
+                {
+                    Console.WriteLine("Item not found");
+                    return "Not Items Found";
+                }
+            }
+        }
+        //_________
+        public int EditItemById(int itemToEditId)
+        {
+            using (var dbContext = new MainDb())
+            {
+                var itemToEdit = dbContext.items.Where(item => item.Id == itemToEditId).FirstOrDefault();
+
+                if (itemToEdit != null)
+                {
+                    //THIS IS AN EXAMPLE EDIT
+                    itemToEdit.Name = "EditedItem";
+                    int result = dbContext.SaveChanges();
+                    return result;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
 
         }
-        public void LoadItemById()
+        public int DeleteItemById(int itemToDeleteId)
         {
+            using (var dbContext = new MainDb())
+            {
+                var itemToDelete = dbContext.items.Where(item => item.Id == itemToDeleteId).FirstOrDefault();
 
-        }
-        public void EditItemById()
-        {
+                if (itemToDelete != null)
+                {
+                    dbContext.items.Remove(itemToDelete);
 
-        }
-        public void DeleteItemById()
-        {
+                    int result = dbContext.SaveChanges();
+                    return result;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
 
         }
     }
