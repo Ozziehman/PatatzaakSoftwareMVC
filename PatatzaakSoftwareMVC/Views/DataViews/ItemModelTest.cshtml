@@ -13,15 +13,10 @@
     <h1>ItemModelTest</h1>
 
     <ul>
-        @if (Model != null)
+        @foreach (var item in Model.Items())
         {
-            @foreach (var item in Model.Items())
-            {
-                <li>@item.Name</li>
-                <li>@item.Price</li>
-            }
-        }
-        
+            <li>@item.Name</li>
+        })
     </ul>
 </body>
 </html>

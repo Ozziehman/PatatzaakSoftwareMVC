@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PatatzaakSoftwareMVC.Data;
 using PatatzaakSoftwareMVC.Models;
+using PatatzaakSoftwareMVC.Models.PageModels;
 
 namespace PatatzaakSoftwareMVC.Controllers
 
@@ -23,7 +24,8 @@ namespace PatatzaakSoftwareMVC.Controllers
         //This is for me to test if i can use models in views
         public IActionResult ItemModelTest()
         {
-            return View("~/Views/DataViews/ItemModelTest.cshtml");
+            var viewModel = new ItemPageModel();
+            return View("~/Views/DataViews/ItemModelTest.cshtml", viewModel);
         }
         //CREATE
         public IActionResult CreateItem(string Name, float Price, float Discount)
