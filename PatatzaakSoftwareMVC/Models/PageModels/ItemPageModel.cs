@@ -9,7 +9,7 @@ namespace PatatzaakSoftwareMVC.Models.PageModels
         {
             using (MainDb dbContext = new MainDb())
             {
-                var items = dbContext.item.ToList();
+                var items = dbContext.items.ToList();
                 return items;
             }
         }

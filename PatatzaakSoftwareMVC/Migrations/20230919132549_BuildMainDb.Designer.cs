@@ -12,7 +12,7 @@ using PatatzaakSoftwareMVC.Data;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     [DbContext(typeof(MainDb))]
-    [Migration("20230919085943_BuildMainDb")]
+    [Migration("20230919132549_BuildMainDb")]
     partial class BuildMainDb
     {
         /// <inheritdoc />
@@ -24,32 +24,6 @@ namespace PatatzaakSoftwareMVC.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int?>("Points")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("customer");
-                });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Item", b =>
                 {
@@ -77,7 +51,7 @@ namespace PatatzaakSoftwareMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("item");
+                    b.ToTable("items");
                 });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Order", b =>
@@ -88,9 +62,6 @@ namespace PatatzaakSoftwareMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Finished")
                         .HasColumnType("bit");
 
@@ -100,11 +71,14 @@ namespace PatatzaakSoftwareMVC.Migrations
                     b.Property<float>("TotalPrice")
                         .HasColumnType("real");
 
+                    b.Property<int?>("userId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("userId");
 
-                    b.ToTable("order");
+                    b.ToTable("orders");
                 });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.OrderedItem", b =>
@@ -127,7 +101,41 @@ namespace PatatzaakSoftwareMVC.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("orderedItem");
+                    b.ToTable("orderedItems");
+                });
+
+            modelBuilder.Entity("PatatzaakSoftwareMVC.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Voucher", b =>
@@ -143,31 +151,29 @@ namespace PatatzaakSoftwareMVC.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("ExpiresBy")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("userId");
 
-                    b.ToTable("voucher");
+                    b.ToTable("vouchers");
                 });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Order", b =>
                 {
-                    b.HasOne("PatatzaakSoftwareMVC.Models.Customer", "Customer")
-                        .WithMany("orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("PatatzaakSoftwareMVC.Models.User", "user")
+                        .WithMany("Orders")
+                        .HasForeignKey("userId");
 
-                    b.Navigation("Customer");
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.OrderedItem", b =>
@@ -191,25 +197,25 @@ namespace PatatzaakSoftwareMVC.Migrations
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Voucher", b =>
                 {
-                    b.HasOne("PatatzaakSoftwareMVC.Models.Customer", "Customer")
-                        .WithMany("vouchers")
-                        .HasForeignKey("CustomerId")
+                    b.HasOne("PatatzaakSoftwareMVC.Models.User", "user")
+                        .WithMany("Vouchers")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Customer", b =>
-                {
-                    b.Navigation("orders");
-
-                    b.Navigation("vouchers");
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Order", b =>
                 {
                     b.Navigation("OrderedItems");
+                });
+
+            modelBuilder.Entity("PatatzaakSoftwareMVC.Models.User", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("Vouchers");
                 });
 #pragma warning restore 612, 618
         }

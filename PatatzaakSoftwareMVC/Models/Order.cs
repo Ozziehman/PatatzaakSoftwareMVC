@@ -20,11 +20,51 @@ namespace PatatzaakSoftwareMVC.Models
 
         public bool Finished { get; set; }
 
-        [Required]
-        public Customer? Customer { get; set; }
+        public User? user { get; set; }
         public ICollection<OrderedItem>? OrderedItems { get; set; }
 
-  
+        public Order()
+        {
+            OrderedItems = new List<OrderedItem>();
+        }
+
+        public void AddOrderedItem()
+        {
+
+        }
+        public void GetOrderedItems()
+        {
+
+        }
+        public void UseVoucher()
+        {
+
+        }
+        public void CreateOrder()
+        {
+
+        }
+        public void loadOrders()
+        {
+
+        }
+        public void LoadOrderById()
+        {
+
+        }
+        public void EditOrderById()
+        {
+
+        }
+        public void DeleteOrderById()
+        {
+
+        }
+        public void CompleteOrder()
+        {
+
+        }
+
         
     }
 }

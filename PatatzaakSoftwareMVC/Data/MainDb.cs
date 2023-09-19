@@ -5,11 +5,11 @@ namespace PatatzaakSoftwareMVC.Data
 {
     public class MainDb : DbContext
     {
-        public DbSet<Item> item { get; set; }
-        public DbSet<Customer> customer { get; set; }
-        public DbSet<Voucher> voucher { get; set; }
-        public DbSet<Order> order { get; set; }
-        public DbSet<OrderedItem> orderedItem { get; set; }
+        public DbSet<Item> items { get; set; }
+        public DbSet<User> users { get; set; }
+        public DbSet<Voucher> vouchers { get; set; }
+        public DbSet<Order> orders { get; set; }
+        public DbSet<OrderedItem> orderedItems { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

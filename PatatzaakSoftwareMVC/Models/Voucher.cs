@@ -22,6 +22,11 @@ namespace PatatzaakSoftwareMVC.Models
         public DateTime ExpiresBy { get; set; }
 
         [Required]
-        public Customer? Customer { get; set; }
+        public User? user { get; set; }
+
+        public void RedeemVoucher()
+        {
+
+        }
     }
 }

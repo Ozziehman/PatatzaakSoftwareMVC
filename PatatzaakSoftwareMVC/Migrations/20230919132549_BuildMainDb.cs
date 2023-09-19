@@ -12,22 +12,7 @@ namespace PatatzaakSoftwareMVC.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "customer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Points = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_customer", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "item",
+                name: "items",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -39,11 +24,28 @@ namespace PatatzaakSoftwareMVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_item", x => x.Id);
+                    table.PrimaryKey("PK_items", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "order",
+                name: "users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Points = table.Column<int>(type: "int", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "orders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -51,21 +53,20 @@ namespace PatatzaakSoftwareMVC.Migrations
                     TotalPrice = table.Column<float>(type: "real", nullable: false),
                     TimePlaced = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Finished = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                    userId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_order", x => x.Id);
+                    table.PrimaryKey("PK_orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_order_customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_orders_users_userId",
+                        column: x => x.userId,
+                        principalTable: "users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "voucher",
+                name: "vouchers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -73,21 +74,21 @@ namespace PatatzaakSoftwareMVC.Migrations
                     Price = table.Column<float>(type: "real", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ExpiresBy = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                    userId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_voucher", x => x.Id);
+                    table.PrimaryKey("PK_vouchers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_voucher_customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "customer",
+                        name: "FK_vouchers_users_userId",
+                        column: x => x.userId,
+                        principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "orderedItem",
+                name: "orderedItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -97,59 +98,59 @@ namespace PatatzaakSoftwareMVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_orderedItem", x => x.Id);
+                    table.PrimaryKey("PK_orderedItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_orderedItem_item_ItemId",
+                        name: "FK_orderedItems_items_ItemId",
                         column: x => x.ItemId,
-                        principalTable: "item",
+                        principalTable: "items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_orderedItem_order_OrderId",
+                        name: "FK_orderedItems_orders_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "order",
+                        principalTable: "orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_order_CustomerId",
-                table: "order",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_orderedItem_ItemId",
-                table: "orderedItem",
+                name: "IX_orderedItems_ItemId",
+                table: "orderedItems",
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orderedItem_OrderId",
-                table: "orderedItem",
+                name: "IX_orderedItems_OrderId",
+                table: "orderedItems",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_voucher_CustomerId",
-                table: "voucher",
-                column: "CustomerId");
+                name: "IX_orders_userId",
+                table: "orders",
+                column: "userId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_vouchers_userId",
+                table: "vouchers",
+                column: "userId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "orderedItem");
+                name: "orderedItems");
 
             migrationBuilder.DropTable(
-                name: "voucher");
+                name: "vouchers");
 
             migrationBuilder.DropTable(
-                name: "item");
+                name: "items");
 
             migrationBuilder.DropTable(
-                name: "order");
+                name: "orders");
 
             migrationBuilder.DropTable(
-                name: "customer");
+                name: "users");
         }
     }
 }

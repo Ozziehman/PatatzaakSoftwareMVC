@@ -46,7 +46,7 @@ namespace PatatzaakSoftwareMVC.Controllers
                     Discount = 0.00f
                 };
 
-                dbContext.item.Add(item);
+                dbContext.items.Add(item);
                 dbContext.SaveChanges();
             }
             _logger.LogInformation("Item created");
@@ -61,7 +61,7 @@ namespace PatatzaakSoftwareMVC.Controllers
 
             using (var dbContext = new MainDb())
             {
-                var itemToLoad = dbContext.item.Where(item => item.Id == int.Parse(itemToLoadId)).FirstOrDefault();
+                var itemToLoad = dbContext.items.Where(item => item.Id == int.Parse(itemToLoadId)).FirstOrDefault();
 
                 if (itemToLoad != null)
                 {
@@ -76,12 +76,11 @@ namespace PatatzaakSoftwareMVC.Controllers
                 }
             }
         }
-
         public IActionResult LoadAllItemsAsJson()
         {
             using (var dbContext = new MainDb())
             {
-                var itemsToLoad = dbContext.item.ToList(); // Load all items
+                var itemsToLoad = dbContext.items.ToList(); // Load all items
 
                 if (itemsToLoad.Count > 0)
                 {
@@ -102,7 +101,7 @@ namespace PatatzaakSoftwareMVC.Controllers
 
             using (MainDb dbContext = new MainDb())
             {
-                var items = dbContext.item.ToList();
+                var items = dbContext.items.ToList();
                 foreach (Item item in items)
                 {
                     _logger.LogInformation($"Item loaded: {item.Name}");
@@ -119,7 +118,7 @@ namespace PatatzaakSoftwareMVC.Controllers
 
             using (var dbContext = new MainDb())
             {
-                var itemToEdit = dbContext.item.Where(item => item.Id == int.Parse(itemToEditId)).FirstOrDefault();
+                var itemToEdit = dbContext.items.Where(item => item.Id == int.Parse(itemToEditId)).FirstOrDefault();
 
                 if (itemToEdit != null)
                 {
@@ -146,12 +145,12 @@ namespace PatatzaakSoftwareMVC.Controllers
 
             using (var dbContext = new MainDb())
             {
-                var itemToDelete = dbContext.item.Where(item => item.Id == int.Parse(itemToDeleteId)).FirstOrDefault();
+                var itemToDelete = dbContext.items.Where(item => item.Id == int.Parse(itemToDeleteId)).FirstOrDefault();
 
                 if (itemToDelete != null)
                 {
                     //THIS IS AN EXAMPLE EDIT
-                    dbContext.item.Remove(itemToDelete);
+                    dbContext.items.Remove(itemToDelete);
 
                     dbContext.SaveChanges();
                     _logger.LogInformation("Deleted");

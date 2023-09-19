@@ -19,6 +19,33 @@ namespace PatatzaakSoftwareMVC.Models
 
         public float? Discount { get; set; }
 
-        
+        public void CreateOrderedItem()
+        {
+
+        }
+        public void AddDiscount()
+        {
+
+        }
+        public void CreateItem()
+        {
+
+        }
+        public void LoadItems()
+        {
+
+        }
+        public void LoadItemById()
+        {
+
+        }
+        public void EditItemById()
+        {
+
+        }
+        public void DeleteItemById()
+        {
+
+        }
     }
 }
