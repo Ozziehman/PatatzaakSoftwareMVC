@@ -1,0 +1,28 @@
+﻿@page
+@model PatatzaakSoftwareMVC.Models.PageModels.ItemPageModel
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Item JSON Data</title>
+</head>
+<body>
+    <h1>ItemModelTest</h1>
+
+    <ul>
+        @if (Model != null)
+        {
+            @foreach (var item in Model.Items())
+            {
+                <li>@item.Name</li>
+                <li>@item.Price</li>
+            }
+        }
+        
+    </ul>
+</body>
+</html>
+

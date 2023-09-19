@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatatzaakSoftwareMVC.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,10 +24,7 @@ namespace PatatzaakSoftwareMVC.Models
         public Customer? Customer { get; set; }
         public ICollection<OrderedItem>? OrderedItems { get; set; }
 
-        public Order()
-        {
-            OrderedItems = new List<OrderedItem>();
-        }   
-       
+  
+        
     }
 }

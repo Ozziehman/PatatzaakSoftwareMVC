@@ -19,6 +19,12 @@ namespace PatatzaakSoftwareMVC.Controllers
         {
             return View("~/Views/Company/CRUDItemPage.cshtml");
         }
+
+        //This is for me to test if i can use models in views
+        public IActionResult ItemModelTest()
+        {
+            return View("~/Views/DataViews/ItemModelTest.cshtml");
+        }
         //CREATE
         public IActionResult CreateItem(string Name, float Price, float Discount)
         {

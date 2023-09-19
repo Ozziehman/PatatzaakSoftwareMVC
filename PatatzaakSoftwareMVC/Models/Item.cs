@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PatatzaakSoftwareMVC.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace PatatzaakSoftwareMVC.Models
 {
@@ -17,5 +18,7 @@ namespace PatatzaakSoftwareMVC.Models
         public float Price { get; set; }
 
         public float? Discount { get; set; }
+
+        
     }
 }
