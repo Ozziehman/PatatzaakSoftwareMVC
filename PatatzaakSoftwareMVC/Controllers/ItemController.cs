@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using PatatzaakSoftwareMVC.Data;
 using PatatzaakSoftwareMVC.Models;
@@ -21,26 +22,33 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/Company/CRUDItemPage.cshtml");
         }
 
-        //This is for me to test if i can use models in views
+
+
+
+
+        //This is for me to test if i can use models in views THIS DOES NOT WORK YET
         public IActionResult ItemModelTest()
         {
             ;
             return View("~/Views/DataViews/ItemModelTest.cshtml");
         }
+        //___________________________________________________________________________
+
+
+        
+
+
+
 
         //CREATE
         public IActionResult CreateItem()
         {
-            Item item = new Item()
-            {
-                //Data should be entered into here, maybe use HttpContext.Request.Form[""] to get data from form
-                Name= "TestItem",
-                Price = 1.00f,
-                Discount = 0.00f,
-                ImagePath = "../Resources/Images/placeholder.jpg"
-            };
- 
-            if (item.CreateItem(item) > 0)
+            string Name = HttpContext.Request.Form["ItemName"];
+            float Price= float.Parse(HttpContext.Request.Form["ItemPrice"]);
+            float Discount = float.Parse(HttpContext.Request.Form["ItemDiscount"]);
+
+
+            if (new Item().CreateItem(Name, Price, Discount) > 0)
             {
                 _logger.LogInformation("Item created");
             }
@@ -71,8 +79,38 @@ namespace PatatzaakSoftwareMVC.Controllers
         //UPDATE
         public IActionResult ProcessEditForm()
         {
-            string itemToEditId = HttpContext.Request.Form["ItemToEditId"];
-            if (new Item().EditItemById(int.Parse(itemToEditId)) > 0)
+            float NewPriceFloat = 0;
+            float NewDiscountFloat = 0;
+
+             //Convert everything to something the EditItemById method can use
+            int itemToEditId = int.Parse(HttpContext.Request.Form["ItemToEditId"]);
+            string? NewName = HttpContext.Request.Form["ItemNewName"];
+            if (NewName.IsNullOrEmpty())
+            {
+                _logger.LogInformation("No new name entered");
+            }
+            string? NewPrice = HttpContext.Request.Form["ItemNewPrice"];
+            if (!NewPrice.IsNullOrEmpty())
+            {
+                NewPriceFloat = float.Parse(NewPrice);
+            }
+            else
+            {
+                _logger.LogInformation("No new price entered");
+            }
+
+            string? NewDiscount = HttpContext.Request.Form["ItemNewDiscount"];
+            if (!NewDiscount.IsNullOrEmpty())
+            {
+                NewDiscountFloat = float.Parse(NewDiscount);
+            }
+            else
+            {
+                _logger.LogInformation("No new discount entered");
+            }
+
+
+            if (new Item().EditItemById(itemToEditId, NewName, NewPriceFloat, NewDiscountFloat) > 0)
             {
                 _logger.LogInformation("item found and edited");
             }

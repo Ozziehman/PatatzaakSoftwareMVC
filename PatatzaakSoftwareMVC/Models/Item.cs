@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using PatatzaakSoftwareMVC.Data;
 using System.ComponentModel.DataAnnotations;
@@ -29,8 +30,16 @@ namespace PatatzaakSoftwareMVC.Models
         {
 
         }
-        public int CreateItem(Item item)
+        public int CreateItem(string Name, float Price, float Discount)
         {
+            
+            Item item = new()
+            {
+                Name = Name,
+                Price = Price,
+                Discount = Discount
+            };
+
             using (var dbContext = new MainDb())
             {
                 dbContext.items.Add(item);
@@ -56,7 +65,7 @@ namespace PatatzaakSoftwareMVC.Models
                 }
             }
         }
-        //TEST
+
         public List<Item> LoadItemsObject() 
         {
 
@@ -85,8 +94,8 @@ namespace PatatzaakSoftwareMVC.Models
                 }
             }
         }
-        //_________
-        public int EditItemById(int itemToEditId)
+ 
+        public int EditItemById(int itemToEditId, string? NewName, float NewPrice, float NewDiscount)
         {
             using (var dbContext = new MainDb())
             {
@@ -95,7 +104,19 @@ namespace PatatzaakSoftwareMVC.Models
                 if (itemToEdit != null)
                 {
                     //THIS IS AN EXAMPLE EDIT
-                    itemToEdit.Name = "EditedItem";
+                    if(!NewName.IsNullOrEmpty())
+                    {
+                        itemToEdit.Name = NewName;
+                    }
+                    if(NewPrice != 0)
+                    {
+                        itemToEdit.Price = NewPrice;
+                    }
+                    if(NewDiscount != 0)
+                    {
+                        itemToEdit.Discount = NewDiscount;
+                    }
+
                     int result = dbContext.SaveChanges();
                     return result;
                 }
