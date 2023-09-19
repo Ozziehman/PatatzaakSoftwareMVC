@@ -1,6 +1,8 @@
 ﻿@page
 @model PatatzaakSoftwareMVC.Models.PageModels.ItemPageModel
-
+@{
+    List<Item> items = Model.Items();
+}
 
 
 <!DOCTYPE html>
@@ -13,10 +15,14 @@
     <h1>ItemModelTest</h1>
 
     <ul>
-        @foreach (var item in Model.Items())
+       
+        @if (items != null)
         {
-            <li>@item.Name</li>
-        })
+            @foreach (Item item in items)
+            {
+                <li>@item</li>
+            }
+        }
     </ul>
 </body>
 </html>

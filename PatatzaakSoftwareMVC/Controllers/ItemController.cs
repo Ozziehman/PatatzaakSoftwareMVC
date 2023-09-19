@@ -24,9 +24,16 @@ namespace PatatzaakSoftwareMVC.Controllers
         //This is for me to test if i can use models in views
         public IActionResult ItemModelTest()
         {
-            var viewModel = new ItemPageModel();
-            return View("~/Views/DataViews/ItemModelTest.cshtml", viewModel);
+            ;
+            return View("~/Views/DataViews/ItemModelTest.cshtml");
         }
+
+
+
+
+
+
+
         //CREATE
         public IActionResult CreateItem(string Name, float Price, float Discount)
         {
@@ -90,6 +97,19 @@ namespace PatatzaakSoftwareMVC.Controllers
             }
         }
 
+        public IActionResult LoadItemsAsObjects()
+        {
+
+            using (MainDb dbContext = new MainDb())
+            {
+                var items = dbContext.item.ToList();
+                foreach (Item item in items)
+                {
+                    _logger.LogInformation($"Item loaded: {item.Name}");
+                }
+                return View("~/Views/DataViews/ItemObjectDataView.cshtml", items);
+            }
+        }
 
 
         //UPDATE

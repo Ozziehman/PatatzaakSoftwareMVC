@@ -1,0 +1,26 @@
+﻿@model List<Item>
+
+@{
+    ViewData["Title"] = "Item Object Data";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Item Object Data</title>
+</head>
+<body>
+    <h1>Item Object Data</h1>
+
+    <div class="item-list">
+        @foreach (var item in Model)
+        {
+            <div class="item-row">
+     
+                <p>@item.Name</p>
+            </div>
+        }
+    </div>
+</body>
+</html>
