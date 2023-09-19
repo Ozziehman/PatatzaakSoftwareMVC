@@ -21,7 +21,12 @@ namespace PatatzaakSoftwareMVC.Models
 
         [Required]
         public Customer? Customer { get; set; }
-        public List<OrderedItem>? OrderedItems { get; set; }
+        public ICollection<OrderedItem>? OrderedItems { get; set; }
+
+        public Order()
+        {
+            OrderedItems = new List<OrderedItem>();
+        }   
        
     }
 }
