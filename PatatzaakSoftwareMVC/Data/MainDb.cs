@@ -14,12 +14,14 @@ namespace PatatzaakSoftwareMVC.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //PC
-            string connection = "Server=localhost\\MSSQLSERVER02;Database=master;Trusted_Connection=True;TrustServerCertificate=Yes";
-            //_______
-            //Laptop
-            //string connection = "Data Source=LAPTOPOSCARTHEE\\MSSQLSERVER02;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=Yes";
-            //_______
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            //Choose whether you are working on Oscar laptop or PC comment out the other one
+            string connection = configuration.GetConnectionString("MainDbConnectionPC");
+            //string connection = configuration.GetConnectionString("MainDbConnectionLaptop");
             optionsBuilder.UseSqlServer(connection);
         }
     }

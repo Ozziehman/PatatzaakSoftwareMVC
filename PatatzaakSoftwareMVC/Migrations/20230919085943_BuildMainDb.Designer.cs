@@ -12,7 +12,7 @@ using PatatzaakSoftwareMVC.Data;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     [DbContext(typeof(MainDb))]
-    [Migration("20230919082453_BuildMainDb")]
+    [Migration("20230919085943_BuildMainDb")]
     partial class BuildMainDb
     {
         /// <inheritdoc />
