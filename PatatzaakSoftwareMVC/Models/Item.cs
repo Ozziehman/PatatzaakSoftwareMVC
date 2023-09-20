@@ -18,14 +18,10 @@ namespace PatatzaakSoftwareMVC.Models
         public string ImagePath { get; set; } = "../Resources/Images/placeholder.jpg";
 
         [Required]
-        public float Price { get; set; }
+        public float Price { get; set; } 
 
         public float? Discount { get; set; }
    
-        public void CreateOrderedItem()
-        {
-
-        }
         public void AddDiscount()
         {
 
@@ -48,6 +44,7 @@ namespace PatatzaakSoftwareMVC.Models
                 return result;
             }
         }
+
         public string LoadItems()
         {
             using (var dbContext = new MainDb())
@@ -75,7 +72,6 @@ namespace PatatzaakSoftwareMVC.Models
                 return items;
             }
         }
-
 
         public string LoadItemById(int itemToLoadId)
         {

@@ -17,5 +17,9 @@ namespace PatatzaakSoftwareMVC.Models
         [Required]
         public Order? Order { get; set; }
 
+        public void CreateOrderedItem(Item item )
+        {
+            Console.WriteLine();
+        }
     }
 }

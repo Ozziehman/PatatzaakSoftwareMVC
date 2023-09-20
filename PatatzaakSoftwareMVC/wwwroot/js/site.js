@@ -88,5 +88,13 @@ function addToReceipt(item, itemPrice) {
 
     console.log(item + " added to receipt");
 
+
+
+    
+}
+
+function AddItemToItemsToOrder(name, id, price)
+{
+
 }
 

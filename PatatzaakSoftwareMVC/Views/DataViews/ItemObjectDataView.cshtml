@@ -17,8 +17,22 @@
         @foreach (var item in Model)
         {
             <div class="item-row">
-     
-                <p>@item.Name</p>
+
+                <div class="col">
+                    <p>@item.Id</p>
+                </div>
+                <div class="col">
+                    <p>@item.Name</p>
+                </div>
+                <div class="col">
+                    <p>@item.ImagePath</p>
+                </div>
+                <div class="col">
+                    <p>@item.Price</p>
+                </div>
+                <div class="col">
+                    <p>@item.Discount</p>
+                </div>
             </div>
         }
     </div>

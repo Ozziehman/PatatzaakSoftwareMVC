@@ -1,7 +1,12 @@
-﻿@model Item
+﻿@model PatatzaakSoftwareMVC.Models.ViewModels.CustomerPageViewModel
 @{
     ViewData["Title"] = "Customer Page";
-    List<Item> items = Model.LoadItemsObject();
+    Item item = Model.CreateItemObject();
+    OrderedItem orderedItem = Model.CreateOrderedItemObject();
+    List<Item> items = item.LoadItemsObject();
+    Order order = Model.CreateOrderObject();
+    
+    
 }
 
 <html>
@@ -27,7 +32,7 @@
                     {
                         <div class="col-md-3 text-center itemCol p-5" style="display: inline-block;">
                             <img id="itemImage" src="@items[i].ImagePath" class="mw-100 h-auto">
-                            <a class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price')">@items[i].Name @items[i].Price</a>
+                                <asp:LinkButton runat="server" class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price');">@items[i].Name @items[i].Price</asp:LinkButton>
                         </div>
                     }
                 }
@@ -51,8 +56,7 @@
                 <div class="container-fluid p-5 text-center">
                     <a class="btn order-button">Bestel selectie</a>
                 </div>
-                <button onclick="CreateMenuItem()">button to add</button> <!--THIS IS A TEST BUTTON, THE PAGE SHOULD LOAD IN ALL ITEMS WHEN LOADING IN-->
-                <!--Make this invisible until the order is placed-->
+            
                 <div class="container-fluid p-5 text-center">
                     <div class="row">
                         <div class="col-md-3">
