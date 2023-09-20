@@ -32,7 +32,7 @@
                     {
                         <div class="col-md-3 text-center itemCol p-5" style="display: inline-block;">
                             <img id="itemImage" src="@items[i].ImagePath" class="mw-100 h-auto">
-                                <asp:LinkButton runat="server" class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price');">@items[i].Name @items[i].Price</asp:LinkButton>
+                                <asp:LinkButton runat="server" class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price');">@items[i].Name - $@items[i].Price</asp:LinkButton>
                         </div>
                     }
                 }
