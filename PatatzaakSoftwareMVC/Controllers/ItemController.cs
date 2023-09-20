@@ -27,11 +27,11 @@ namespace PatatzaakSoftwareMVC.Controllers
 
 
         //This is for me to test if i can use models in views THIS DOES NOT WORK YET
-        public IActionResult ItemModelTest()
+       /* public IActionResult ItemModelTest()
         {
             ;
             return View("~/Views/DataViews/ItemModelTest.cshtml");
-        }
+        }*/
         //___________________________________________________________________________
 
 

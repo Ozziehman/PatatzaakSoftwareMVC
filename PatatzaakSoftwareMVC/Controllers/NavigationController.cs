@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PatatzaakSoftwareMVC.Models;
 
 namespace PatatzaakSoftwareMVC.Controllers
 {
@@ -11,7 +12,7 @@ namespace PatatzaakSoftwareMVC.Controllers
 
         public IActionResult CustomerPage()
         {
-            return View("~/Views/Customer/CustomerPage.cshtml");
+            return View("~/Views/Customer/CustomerPage.cshtml", new Item());
         }
 
         public IActionResult CompanyPage()

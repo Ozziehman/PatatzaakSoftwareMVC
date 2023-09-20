@@ -4,7 +4,7 @@
     //rewrite this to menu items
 });
 
-var itemList = ["friet", "Frikandel", "Banaan", "Gehaktbal"]; //Test itemList this should come for db/C#API
+/*var itemList = ["friet", "Frikandel", "Banaan", "Gehaktbal"]; //Test itemList this should come for db/C#API
 
 for (let i = 0; i < itemList.length; i++) {
     CreateMenuItem(itemList[i]);
@@ -33,13 +33,13 @@ function CreateMenuItem(itemName, itemPrice = "9.000.000", imagePath = "../Resou
     newDiv.appendChild(newButton);
     DivContainer.appendChild(newDiv);
 
-}
+}*/
 
-var orderNumber;
+
 var dummySpanPresent = true;
 
 //get next order number from database and load it into orderNumber var, display that var in the p1 on the CustomerPage where ordernumber should be displayed
-function addToReceipt(item) {
+function addToReceipt(item, itemPrice) {
     //create list of all added items
     var itemList = []
     if (itemList.includes(item)) {
@@ -54,9 +54,6 @@ function addToReceipt(item) {
         dummySpanPresent = false;
 
     }
-
-
-
 
     for (let i = 0; i < itemList.length; i++) {
 
@@ -74,7 +71,7 @@ function addToReceipt(item) {
         const priceCol = document.createElement("div");
         priceCol.classList.add("col-md-4")
         const priceDiv = document.createElement("div");
-        priceDiv.textContent = "\u20AC 9.000.000"; //let ths load from item, not from itemList in the dummy list
+        priceDiv.textContent = "\u20AC" + itemPrice; //let ths load from item, not from itemList in the dummy list
         priceCol.appendChild(priceDiv);
 
 

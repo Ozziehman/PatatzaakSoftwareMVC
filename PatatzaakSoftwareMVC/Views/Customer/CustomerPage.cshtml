@@ -1,5 +1,7 @@
-﻿@{
+﻿@model Item
+@{
     ViewData["Title"] = "Customer Page";
+    List<Item> items = Model.LoadItemsObject();
 }
 
 <html>
@@ -8,20 +10,35 @@
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" />
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/mainStyle.css" />
-    <script src="../js/script.js"></script>
+    <script src="../js/site.js"></script>
     <title>Customer page</title>
 </head>
 <body>
     <div class="container-fluid vh-100">
         <div class="row">
 
-            <!--menu part-->
             <div class="col-md-8">
                 <div class="container-fluid border-sect vh-100" id="menuColumn">
-                    <!--items go here-->
+               
+            <!--menu part-->
+                @if (items.Count() > 0)
+                {
+                    @for (int i = 0; i < items.Count(); i++)
+                    {
+                        <div class="col-md-3 text-center itemCol p-5" style="display: inline-block;">
+                            <img id="itemImage" src="@items[i].ImagePath" class="mw-100 h-auto">
+                            <a class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price')">@items[i].Name @items[i].Price</a>
+                        </div>
+                    }
+                }
+                @if (items.Count() == 0)
+                {
+                    <div>
+                        <label>Geen items gevonden</label>
+                    </div>
+                }
                 </div>
             </div>
-
             <!--receipt part-->
             <div class="col-md-4 receiptPart" >
 
@@ -52,7 +69,6 @@
         </div>
     </div>
     <a asp-area="" asp-controller="Navigation" asp-action="CRUDItemPage" class="btn">CRUDItemPage</a>
-    <script src="../js/script.js"></script>
 </body>
 
 </html>

@@ -20,8 +20,8 @@ namespace PatatzaakSoftwareMVC.Data
                 .Build();
 
             //Choose whether you are working on Oscar laptop or PC comment out the other one
-            string connection = configuration.GetConnectionString("MainDbConnectionPC");
-            //string connection = configuration.GetConnectionString("MainDbConnectionLaptop");
+            //string connection = configuration.GetConnectionString("MainDbConnectionPC");
+            string connection = configuration.GetConnectionString("MainDbConnectionLaptop");
             optionsBuilder.UseSqlServer(connection);
         }
     }
