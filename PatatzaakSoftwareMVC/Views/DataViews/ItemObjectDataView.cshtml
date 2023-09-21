@@ -16,24 +16,24 @@
     <div class="item-list">
         @foreach (var item in Model)
         {
-            <div class="item-row">
-
-                <div class="col">
+            <div class="item-row objectItemViewRow">
+                <div class="col objectItemViewCol">
                     <p>@item.Id</p>
                 </div>
-                <div class="col">
+                <div class="col objectItemViewCol">
                     <p>@item.Name</p>
                 </div>
-                <div class="col">
+                <div class="col objectItemViewCol">
                     <p>@item.ImagePath</p>
                 </div>
-                <div class="col">
+                <div class="col objectItemViewCol">
                     <p>@item.Price</p>
                 </div>
-                <div class="col">
+                <div class="col objectItemViewCol">
                     <p>@item.Discount</p>
                 </div>
             </div>
+            <div class="box" style="height: 1px; background-color: black; width:100%; padding-left:10%; padding-right:10%"></div>               
         }
     </div>
 </body>

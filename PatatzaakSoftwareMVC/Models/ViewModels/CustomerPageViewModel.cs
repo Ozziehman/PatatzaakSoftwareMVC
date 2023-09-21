@@ -1,9 +1,9 @@
-﻿using Humanizer.Localisation.TimeToClockNotation;
-
+﻿
 namespace PatatzaakSoftwareMVC.Models.ViewModels
 {
     public class CustomerPageViewModel
     {
+     
 
         public Item CreateItemObject()
         {

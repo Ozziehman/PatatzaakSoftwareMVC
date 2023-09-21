@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatatzaakSoftwareMVC.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,9 +18,18 @@ namespace PatatzaakSoftwareMVC.Models
         [Required]
         public Order? Order { get; set; }
 
-        public void CreateOrderedItem(Item item )
+        public int CreateOrderedItem(Item item )
         {
-            Console.WriteLine();
+            using(var dbContext = new MainDb())
+            {
+                OrderedItem orderedItem = new OrderedItem();
+                orderedItem.Item = item;
+                dbContext.orderedItems.Add(orderedItem);
+                int result = dbContext.SaveChanges();
+                return result;
+            }
         }
+
+
     }
 }

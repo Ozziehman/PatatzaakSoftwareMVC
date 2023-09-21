@@ -1,21 +1,23 @@
-﻿@model PatatzaakSoftwareMVC.Models.ViewModels.CustomerPageViewModel
+﻿@using PatatzaakSoftwareMVC.Models.ViewModels
+@model CustomerPageViewModel
+
+
 @{
     ViewData["Title"] = "Customer Page";
     Item item = Model.CreateItemObject();
     OrderedItem orderedItem = Model.CreateOrderedItemObject();
     List<Item> items = item.LoadItemsObject();
     Order order = Model.CreateOrderObject();
-    
-    
+    List<Item> itemsToOrder = new List<Item>(); 
 }
 
 <html>
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" />
-    <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/mainStyle.css" />
-    <script src="../js/site.js"></script>
+    <link rel="stylesheet" href="../wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="../wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../wwwroot/css/site.css" />
+    <script src="../wwwroot/js/site.js"></script>
     <title>Customer page</title>
 </head>
 <body>
@@ -32,7 +34,7 @@
                     {
                         <div class="col-md-3 text-center itemCol p-5" style="display: inline-block;">
                             <img id="itemImage" src="@items[i].ImagePath" class="mw-100 h-auto">
-                                <asp:LinkButton runat="server" class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price');">@items[i].Name - $@items[i].Price</asp:LinkButton>
+                                <div runat="server" class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price', '@items[i].Id');">@items[i].Name - $@items[i].Price</div>
                         </div>
                     }
                 }
@@ -72,7 +74,7 @@
             </div>
         </div>
     </div>
-    <a asp-area="" asp-controller="Navigation" asp-action="CRUDItemPage" class="btn">CRUDItemPage</a>
+    <a asp-area="" asp-controller="Customer" asp-action="CRUDItemPage" class="btn">CRUDItemPage</a>
 </body>
 
 </html>

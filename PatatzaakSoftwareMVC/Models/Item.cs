@@ -22,6 +22,7 @@ namespace PatatzaakSoftwareMVC.Models
 
         public float? Discount { get; set; }
    
+       
         public void AddDiscount()
         {
 

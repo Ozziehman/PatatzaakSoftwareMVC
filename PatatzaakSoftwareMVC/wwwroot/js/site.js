@@ -39,7 +39,7 @@ function CreateMenuItem(itemName, itemPrice = "9.000.000", imagePath = "../Resou
 var dummySpanPresent = true;
 
 //get next order number from database and load it into orderNumber var, display that var in the p1 on the CustomerPage where ordernumber should be displayed
-function addToReceipt(item, itemPrice) {
+function addToReceipt(item, itemPrice, itemId) {
     //create list of all added items
     var itemList = []
     if (itemList.includes(item)) {
@@ -87,14 +87,24 @@ function addToReceipt(item, itemPrice) {
     //display list in receipt
 
     console.log(item + " added to receipt");
-
+   /* sendItemToList(itemId);*/
 
 
     
 }
 
-function AddItemToItemsToOrder(name, id, price)
-{
-
+//WORK IN PROGRESS!!!! AJAX IS NEW TO ME
+/*function sendItemToList(itemId) {
+    // Make an AJAX request to a server-side endpoint to add the itemId to the C# list.
+    $.ajax({
+        type: "POST",
+        url: '/Controllers/CustomerController/AddToReceipt', // Replace with your server-side endpoint URL.
+        data: { itemId: itemId },
+        success: function (response) {
+            // Handle the response from the server if needed.
+            console.log(response);
+        }
+    });
 }
+*/
 

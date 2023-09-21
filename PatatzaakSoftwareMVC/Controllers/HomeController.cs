@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using PatatzaakSoftwareMVC.Models;
+using PatatzaakSoftwareMVC.Models.ViewModels;
 using System.Diagnostics;
 
 namespace PatatzaakSoftwareMVC.Controllers
@@ -19,6 +20,15 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
+        public IActionResult CompanyPage()
+        {
+            return View("~/Views/Company/CompanyPage.cshtml");
+        }
+
+        public IActionResult CustomerPage()
+        {
+            return View("~/Views/Customer/CustomerPage.cshtml", new CustomerPageViewModel());
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

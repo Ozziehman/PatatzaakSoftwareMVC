@@ -28,8 +28,9 @@ namespace PatatzaakSoftwareMVC.Models
             OrderedItems = new List<OrderedItem>();
         }
 
-        public void AddOrderedItem()
+        public void AddOrderedItem(OrderedItem orderedItem)
         {
+            orderedItem.Order = this;
 
         }
         public void GetOrderedItems()
