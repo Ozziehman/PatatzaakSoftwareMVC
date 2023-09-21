@@ -7,6 +7,12 @@ namespace PatatzaakSoftwareMVC.Controllers
     public class CustomerController : Controller
     {
 
+        private readonly ILogger<CustomerController> _logger;
+
+        public CustomerController(ILogger<CustomerController> logger)
+        {
+            _logger = logger;
+        }
         public IActionResult Index()
         {
             return View();
@@ -16,22 +22,20 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/Customer/CRUDItemPage.cshtml");
         }
 
-        //Testing with AJAX
-        /* private List<int> receiptItems = new List<int>();
+        [HttpPost]
+        public IActionResult FillOrderWith(int itemId, int orderId)
+        {
+            OrderedItem orderedItem = new OrderedItem().ConvertItemToOrderedItem(itemId, orderId);
+            if (new OrderedItem().ConvertItemToOrderedItem(itemId, orderId) != null) 
+            {
+                _logger.LogInformation($"orderedItem {orderedItem.Id} with ItemName {orderedItem.Item.Name} added to order with orderId: {orderedItem.Order.Id}");
+            }               
 
+            //Clicking the Order Button should make the order defifinitive and display the complete prices. All the orderedItems that have: orderedItem.Order.Id == orderId can be looked up using a database query. 
+            //So if You want all the orderedItem(.Item) that belong to a specific order you should do a   dbContext.Find.Where(orderedItem.Order.Id == orderId)
 
-         [HttpPost]
-         public ActionResult AddToReceipt(int itemId)
-         {
-             // Add the itemId to your C# list.
-             receiptItems.Add(itemId);
-
-             // You can perform any additional processing here if needed.
-             foreach(int item in receiptItems)
-             {
-                 Console.WriteLine(item);
-             }   
-             return Json(new { success = true }); // Send a JSON response to the client.
-         }*/
+            _logger.LogInformation($"filling order with item {itemId} on order {orderId}");
+            return Json(new { success = true, message = "item added" });
+        }
     }
 }

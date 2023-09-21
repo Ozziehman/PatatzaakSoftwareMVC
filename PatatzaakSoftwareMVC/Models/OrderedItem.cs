@@ -1,4 +1,5 @@
-﻿using PatatzaakSoftwareMVC.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PatatzaakSoftwareMVC.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,18 +19,19 @@ namespace PatatzaakSoftwareMVC.Models
         [Required]
         public Order? Order { get; set; }
 
-        public int CreateOrderedItem(Item item )
+        public OrderedItem ConvertItemToOrderedItem(int itemId, int orderId)
         {
-            using(var dbContext = new MainDb())
+            
+            OrderedItem orderedItem = new OrderedItem();
+            using (var dbContext = new MainDb())
+
             {
-                OrderedItem orderedItem = new OrderedItem();
-                orderedItem.Item = item;
+                orderedItem.Item = dbContext.items.Where(i => i.Id == itemId).FirstOrDefault();
+                orderedItem.Order = dbContext.orders.Where(o => o.Id == orderId).FirstOrDefault();
                 dbContext.orderedItems.Add(orderedItem);
-                int result = dbContext.SaveChanges();
-                return result;
+                dbContext.SaveChanges();            
+                return orderedItem;
             }
         }
-
-
     }
 }

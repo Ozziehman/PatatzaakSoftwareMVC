@@ -12,8 +12,8 @@ using PatatzaakSoftwareMVC.Data;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     [DbContext(typeof(MainDb))]
-    [Migration("20230919133515_BuildMainDb")]
-    partial class BuildMainDb
+    [Migration("20230921185111_MainDbBuild")]
+    partial class MainDbBuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

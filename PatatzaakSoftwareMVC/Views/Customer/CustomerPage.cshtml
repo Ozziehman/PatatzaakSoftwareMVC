@@ -5,10 +5,9 @@
 @{
     ViewData["Title"] = "Customer Page";
     Item item = Model.CreateItemObject();
-    OrderedItem orderedItem = Model.CreateOrderedItemObject();
     List<Item> items = item.LoadItemsObject();
     Order order = Model.CreateOrderObject();
-    List<Item> itemsToOrder = new List<Item>(); 
+    int orderId = order.CreateOrder();
 }
 
 <html>
@@ -34,7 +33,7 @@
                     {
                         <div class="col-md-3 text-center itemCol p-5" style="display: inline-block;">
                             <img id="itemImage" src="@items[i].ImagePath" class="mw-100 h-auto">
-                                <div runat="server" class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price', '@items[i].Id');">@items[i].Name - $@items[i].Price</div>
+                                <div class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price', '@items[i].Id', '@orderId');">@items[i].Name - $@items[i].Price</div>
                         </div>
                     }
                 }

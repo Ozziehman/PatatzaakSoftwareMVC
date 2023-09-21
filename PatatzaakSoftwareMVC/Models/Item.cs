@@ -74,6 +74,14 @@ namespace PatatzaakSoftwareMVC.Models
             }
         }
 
+        public Item LoadItemObject(int Id)
+        {
+            using (MainDb dbContext = new MainDb())
+            {
+                var item = dbContext.items.Where(item => item.Id == Id).FirstOrDefault();
+                return item;
+            }
+        }
         public string LoadItemById(int itemToLoadId)
         {
             using (var dbContext = new MainDb())

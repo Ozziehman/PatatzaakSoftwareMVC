@@ -39,13 +39,13 @@ function CreateMenuItem(itemName, itemPrice = "9.000.000", imagePath = "../Resou
 var dummySpanPresent = true;
 
 //get next order number from database and load it into orderNumber var, display that var in the p1 on the CustomerPage where ordernumber should be displayed
-function addToReceipt(item, itemPrice, itemId) {
+function addToReceipt(itemName, itemPrice, itemId, orderId) {
     //create list of all added items
     var itemList = []
-    if (itemList.includes(item)) {
+    if (itemList.includes(itemName)) {
         //add 1 to item quantity
     } else {
-        itemList.push(item)
+        itemList.push(itemName)
     }
 
     if (dummySpanPresent) {
@@ -86,25 +86,20 @@ function addToReceipt(item, itemPrice, itemId) {
     //add item to list
     //display list in receipt
 
-    console.log(item + " added to receipt");
-   /* sendItemToList(itemId);*/
-
+    console.log(itemName + " added to receipt");
+    sendItemToList(itemId, orderId)
 
     
 }
 
-//WORK IN PROGRESS!!!! AJAX IS NEW TO ME
-/*function sendItemToList(itemId) {
+function sendItemToList(itemId, orderId) {
     // Make an AJAX request to a server-side endpoint to add the itemId to the C# list.
     $.ajax({
         type: "POST",
-        url: '/Controllers/CustomerController/AddToReceipt', // Replace with your server-side endpoint URL.
-        data: { itemId: itemId },
+        url: '/Customer/FillOrderWith',
+        data: { itemId: itemId, orderId: orderId },
         success: function (response) {
-            // Handle the response from the server if needed.
             console.log(response);
         }
     });
 }
-*/
-

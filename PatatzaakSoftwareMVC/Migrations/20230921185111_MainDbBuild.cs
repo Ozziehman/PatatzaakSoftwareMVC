@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class BuildMainDb : Migration
+    public partial class MainDbBuild : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

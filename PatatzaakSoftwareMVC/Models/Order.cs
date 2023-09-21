@@ -41,17 +41,35 @@ namespace PatatzaakSoftwareMVC.Models
         {
 
         }
-        public void CreateOrder()
+        public int CreateOrder()
         {
-
+            using(var dbContext = new MainDb())
+            {
+                Order order = new Order();
+                dbContext.orders.Add(order);
+                dbContext.SaveChanges();
+                return order.Id;
+            }
         }
         public void loadOrders()
         {
 
         }
-        public void LoadOrderById()
+        public Order LoadOrderById(int Id)
         {
-
+            using (var dbContext = new MainDb())
+            {
+                Order order = dbContext.orders.Find(Id);
+                if (order == null)
+                {
+                    Console.WriteLine("No order found that matches the current ordersessionId");
+                    return null;
+                }
+                else
+                {
+                    return order;
+                }
+            }
         }
         public void EditOrderById()
         {

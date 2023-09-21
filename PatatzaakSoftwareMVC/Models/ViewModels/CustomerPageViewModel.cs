@@ -5,6 +5,15 @@ namespace PatatzaakSoftwareMVC.Models.ViewModels
     {
      
 
+
+
+
+
+
+
+
+
+
         public Item CreateItemObject()
         {
             Item item = new Item();
