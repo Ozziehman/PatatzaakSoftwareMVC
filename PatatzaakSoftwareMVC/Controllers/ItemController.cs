@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using PatatzaakSoftwareMVC.Data;
 using PatatzaakSoftwareMVC.Models;
-using PatatzaakSoftwareMVC.Models.PageModels;
+
 
 namespace PatatzaakSoftwareMVC.Controllers
 
@@ -32,23 +32,6 @@ namespace PatatzaakSoftwareMVC.Controllers
         }
 
 
-
-
-
-        //This is for me to test if i can use models in views THIS DOES NOT WORK YET
-        /* public IActionResult ItemModelTest()
-         {
-             ;
-             return View("~/Views/DataViews/ItemModelTest.cshtml");
-         }*/
-        //___________________________________________________________________________
-
-
-
-
-
-
-        //AL OF THESE HttpContext.Request.Form should be replaced with the use of a model, which i am still struggling with
         //CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -91,8 +74,8 @@ namespace PatatzaakSoftwareMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ProcessEditForm(Item item)
         {
-            float NewPriceFloat = item.Discount;
-            float NewDiscountFloat = item.Price;
+            float NewPriceFloat = item.Price;
+            float NewDiscountFloat = item.Discount;
             int itemToEditId = item.Id;
             string? NewName = item.Name;
         
