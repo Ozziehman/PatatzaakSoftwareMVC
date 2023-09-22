@@ -12,8 +12,8 @@ using PatatzaakSoftwareMVC.Data;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     [DbContext(typeof(MainDb))]
-    [Migration("20230921185111_MainDbBuild")]
-    partial class MainDbBuild
+    [Migration("20230922135131_InitialDbBuild")]
+    partial class InitialDbBuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace PatatzaakSoftwareMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<float?>("Discount")
+                    b.Property<float>("Discount")
                         .HasColumnType("real");
 
                     b.Property<string>("ImagePath")

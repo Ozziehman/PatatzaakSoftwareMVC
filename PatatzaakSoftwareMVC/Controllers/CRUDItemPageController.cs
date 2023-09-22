@@ -13,11 +13,10 @@ namespace PatatzaakSoftwareMVC.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index()
+        public IActionResult CRUDItemPage()
         {
-            return View();
+            return View("~/Views/ItemCRUD/CRUDItemPage.cshtml");
         }
-
         public IActionResult Create()
         {
             return View("~/Views/ItemCRUD/Create.cshtml");

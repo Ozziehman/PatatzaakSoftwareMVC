@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class MainDbBuild : Migration
+    public partial class InitialDbBuild : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace PatatzaakSoftwareMVC.Migrations
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    Discount = table.Column<float>(type: "real", nullable: true)
+                    Discount = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

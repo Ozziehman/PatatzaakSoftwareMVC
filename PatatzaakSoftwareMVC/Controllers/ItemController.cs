@@ -10,6 +10,15 @@ using PatatzaakSoftwareMVC.Models.PageModels;
 namespace PatatzaakSoftwareMVC.Controllers
 
 {
+    //_____________________________________________________________________________
+    //This is the controller controller i made myself to understand MVC better     |  
+    //_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_|
+    //I later figured out i used the DbContext in a inconvenient way so the plan is|
+    //To switch to a different method that works with the generated CRUD page from EF
+    //This would be a way friendlier development environment                       | 
+    //_____________________________________________________________________________|
+
+
     public class ItemController : Controller
     {
         private readonly ILogger<ItemController> _logger;
@@ -82,38 +91,11 @@ namespace PatatzaakSoftwareMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ProcessEditForm(Item item)
         {
-            float NewPriceFloat = 0;
-            float NewDiscountFloat = 0;
-
-             //Convert everything to something the EditItemById method can use
+            float NewPriceFloat = item.Discount;
+            float NewDiscountFloat = item.Price;
             int itemToEditId = item.Id;
             string? NewName = item.Name;
-            if (NewName.IsNullOrEmpty())
-            {
-                _logger.LogInformation("No new name entered");
-            }
-            
-            float NewPrice = item.Price;
-            if (NewPrice != 0 && !HttpContext.Request.Form["editPrice"].IsNullOrEmpty())
-            {
-                NewPriceFloat = NewPrice;
-                Console.WriteLine("Succes");
-            }
-            else
-            {
-                _logger.LogInformation("No new price entered");
-            }
-
-            if (!!HttpContext.Request.Form["editDiscount"].IsNullOrEmpty())
-            {
-                NewDiscountFloat =  item.Discount;
-            }
-            else
-            {
-                _logger.LogInformation("No new discount entered");
-            }
-
-
+        
             if (new Item().EditItemById(itemToEditId, NewName, NewPriceFloat, NewDiscountFloat) > 0)
             {
                 _logger.LogInformation("item found and edited");

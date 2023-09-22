@@ -30,7 +30,7 @@ namespace PatatzaakSoftwareMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<float?>("Discount")
+                    b.Property<float>("Discount")
                         .HasColumnType("real");
 
                     b.Property<string>("ImagePath")

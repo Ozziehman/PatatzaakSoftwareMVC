@@ -30,6 +30,8 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/Customer/CustomerPage.cshtml", new CustomerPageViewModel());
         }
 
+    
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
