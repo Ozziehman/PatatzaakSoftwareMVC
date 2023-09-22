@@ -1,67 +1,54 @@
 ﻿@using PatatzaakSoftwareMVC.Models.ViewModels
 @model CustomerPageViewModel
-
-
 @{
-    ViewData["Title"] = "Customer Page";
-    Item item = Model.CreateItemObject();
-    List<Item> items = item.LoadItemsObject();
-    Order order = Model.CreateOrderObject();
-    int orderId = order.CreateOrder();
-}
 
+    var sessionOrder = Model.CreateOrderObject();
+}
 <html>
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <script src="../wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="../wwwroot/css/site.css" />
-    <script src="../wwwroot/js/site.js"></script>
+    <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="~/wwwroot/css/site.css" />
+    <script src="~/wwwroot/js/site.js"></script>
     <title>Customer page</title>
 </head>
 <body>
     <div class="container-fluid vh-100">
         <div class="row">
-
             <div class="col-md-8">
                 <div class="container-fluid border-sect vh-100" id="menuColumn">
-               
-            <!--menu part-->
-                @if (items.Count() > 0)
-                {
-                    @for (int i = 0; i < items.Count(); i++)
+                    <!--menu part-->
+                    @if (ViewBag.Items != null && ViewBag.Items.Count > 0)
                     {
-                        <div class="col-md-3 text-center itemCol p-5" style="display: inline-block;">
-                            <img id="itemImage" src="@items[i].ImagePath" class="mw-100 h-auto">
-                                <div class="btn" onclick="addToReceipt('@items[i].Name', '@items[i].Price', '@items[i].Id', '@orderId');">@items[i].Name - $@items[i].Price</div>
+                        @foreach (var item in ViewBag.Items)
+                        {
+                            <div class="col-md-3 text-center itemCol p-5" style="display: inline-block;">
+                                <img id="itemImage" src="@item.ImagePath" class="mw-100 h-auto">
+                                <div class="btn" onclick="addToReceipt('@item.Name', '@item.Price', '@item.Id', '@sessionOrder.Id');">@item.Name - $@item.Price</div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div>
+                            <label>Geen items gevonden</label>
                         </div>
                     }
-                }
-                @if (items.Count() == 0)
-                {
-                    <div>
-                        <label>Geen items gevonden</label>
-                    </div>
-                }
                 </div>
             </div>
             <!--receipt part-->
-            <div class="col-md-4 receiptPart" >
-
-
-
+            <div class="col-md-4 receiptPart">
                 <div id="receipt" class="container-fluid border-sect">
                     <span id="dummySpan">nog geen items in bestelling</span>
                 </div>
-
                 <div class="container-fluid p-5 text-center">
                     <a class="btn order-button">Bestel selectie</a>
                 </div>
-            
                 <div class="container-fluid p-5 text-center">
                     <div class="row">
                         <div class="col-md-3">
-                            <img src="../Resources/Images/Checkmark.png" class="mw-100 h-auto">
+                            <img src="~/Resources/Images/Checkmark.png" class="mw-100 h-auto">
                         </div>
                         <div class="col-md-9">
                             <p>Bestelling is geplaatst</p>
@@ -69,10 +56,8 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
 </body>
-
 </html>

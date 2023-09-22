@@ -1,7 +1,7 @@
 ﻿
 @model PatatzaakSoftwareMVC.Models.Item;
 @* Create Item (CREATE) *@
-<div class="row justify-content-center align-items-center p-1">
+@* <div class="row justify-content-center align-items-center p-1">
     <form method="post" action="/Item/CreateItem">
         @Html.AntiForgeryToken()
         <div class="form-group">
@@ -23,4 +23,5 @@
         </div>
         <button type="submit" class="btn btn-primary" style="color: black">Create</button>
     </form>
-</div>
+</div> *@
+@*  This page is still int he project to show what i did before switching to the DI version of accessing the db, go to the GeneratedItem folder for the working CRUD page        *@     

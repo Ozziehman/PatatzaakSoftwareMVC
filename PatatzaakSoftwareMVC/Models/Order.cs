@@ -28,7 +28,45 @@ namespace PatatzaakSoftwareMVC.Models
             OrderedItems = new List<OrderedItem>();
         }
 
-        public void AddOrderedItem(OrderedItem orderedItem)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Old testing code with other DBContext method
+        /*public void AddOrderedItem(OrderedItem orderedItem)
         {
             orderedItem.Order = this;
 
@@ -83,7 +121,7 @@ namespace PatatzaakSoftwareMVC.Models
         {
 
         }
+*/
 
-        
     }
 }

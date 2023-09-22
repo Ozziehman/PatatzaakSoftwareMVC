@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PatatzaakSoftwareMVC.Models;
+using System;
 
 namespace PatatzaakSoftwareMVC.Data
 {
@@ -12,7 +13,48 @@ namespace PatatzaakSoftwareMVC.Data
         public DbSet<OrderedItem> orderedItems { get; set; }
 
 
+        public MainDb(DbContextOptions<MainDb> contextOptions) : base(contextOptions)
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Old testing code with other DBContext method
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -23,7 +65,7 @@ namespace PatatzaakSoftwareMVC.Data
             string connection = configuration.GetConnectionString("MainDbConnectionPC");
             //string connection = configuration.GetConnectionString("MainDbConnectionLaptop");
             optionsBuilder.UseSqlServer(connection);
-        }
+        }*/
     }
 }
 

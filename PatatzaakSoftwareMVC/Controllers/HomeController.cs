@@ -20,10 +20,6 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
-        public IActionResult CompanyPage()
-        {
-            return View("~/Views/Company/CompanyPage.cshtml");
-        }
 
         public IActionResult CustomerPage()
         {

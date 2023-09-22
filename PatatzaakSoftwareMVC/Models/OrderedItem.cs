@@ -13,13 +13,46 @@ namespace PatatzaakSoftwareMVC.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required]   
         public Item? Item { get; set; }
 
         [Required]
         public Order? Order { get; set; }
 
-        public OrderedItem ConvertItemToOrderedItem(int itemId, int orderId)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Old testing code with other DBContext method
+        /*public OrderedItem ConvertItemToOrderedItem(int itemId, int orderId)
         {
             
             OrderedItem orderedItem = new OrderedItem();
@@ -32,6 +65,6 @@ namespace PatatzaakSoftwareMVC.Models
                 dbContext.SaveChanges();            
                 return orderedItem;
             }
-        }
+        }*/
     }
 }
