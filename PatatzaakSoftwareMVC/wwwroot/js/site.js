@@ -103,3 +103,15 @@ function sendItemToList(itemId, orderId) {
         }
     });
 }
+
+
+function PlaceOrderButtonClicked(orderId) {
+    $.ajax({
+        type: "POST",
+        url: '/Customer/PlaceOrder',
+        data: { orderId: orderId },
+        success: function (response) {
+            console.log(response);
+        }
+    });
+}

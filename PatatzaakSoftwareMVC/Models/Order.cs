@@ -19,7 +19,11 @@ namespace PatatzaakSoftwareMVC.Models
         public DateTime TimePlaced { get; set; }
 
         public bool Finished { get; set; }
-
+        public string? Status { get; set; } = "BeingChosen"; //1: BeingChosen
+                                                             //2: Placed
+                                                             //3: Completed
+                                                             //4: Cancelled      
+        
         public User? user { get; set; }
         public ICollection<OrderedItem>? OrderedItems { get; set; }
 

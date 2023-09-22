@@ -21,10 +21,6 @@ namespace PatatzaakSoftwareMVC.Controllers
         }
 
 
-        public IActionResult CustomerPage()
-        {
-            return View("~/Views/Customer/CustomerPage.cshtml", new CustomerPageViewModel());
-        }
 
     
 

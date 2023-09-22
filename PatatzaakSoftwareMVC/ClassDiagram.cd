@@ -3,14 +3,14 @@
   <Class Name="PatatzaakSoftwareMVC.Models.Item">
     <Position X="3.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABCAAAAAwAQAAAAgBAAAIQAEAAAQAAAAgAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAQAAAAAAAAAAAIQAAAAAAAAAAgAAAAAAAAA=</HashCode>
       <FileName>Models\Item.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PatatzaakSoftwareMVC.Models.Order">
     <Position X="7" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAASAQAAAQAQAAAAABQAAAAQAAQgQAAAAAAAAAAACQA=</HashCode>
+      <HashCode>AAASAAAEAAAAAAAAAAQAAAAAAAAAQAAAAAAAAAAACQA=</HashCode>
       <FileName>Models\Order.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
