@@ -1,0 +1,136 @@
+﻿@model PatatzaakSoftwareMVC.Models.Item
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="../wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../wwwroot/css/site.css" />
+    <script src="../wwwroot/js/site.js"></script>
+    <title>Crud page</title>
+</head>
+<body style="margin-top: 1%">
+    <h1>CRUD functionality page for Item</h1>
+
+    <div class="d-flex align-items-center justify-content-center vh-100">
+        <div class="row" display="flex">
+            <div class="col">
+                <a asp-area="" asp-controller="CRUDItemPage" asp-action="Create" class="btn">Create Item</a>
+            </div>
+            <div class="col">
+                <a asp-area="" asp-controller="CRUDItemPage" asp-action="Read" class="btn">Read Item(s)</a>
+            </div>
+            <div class="col">
+                <a asp-area="" asp-controller="CRUDItemPage" asp-action="Update" class="btn">Update/Edit Item</a>
+            </div>
+            <div class="col">
+                <a asp-area="" asp-controller="CRUDItemPage" asp-action="Delete" class="btn">Delete Item</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <label>__________________________________________________________________________________________________________________________________________________________________</label>
+
+        @* Create Item (CREATE) *@
+        <div class="row justify-content-center align-items-center p-1">
+            <form method="post" action="/Item/CreateItem">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Discount"></label>
+                    <input asp-for="Discount" class="form-control" />
+                    <span asp-validation-for="Discount" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" style="color: black">Create</button>
+            </form>
+        </div>
+        <label>__________________________________________________________________________________________________________________________________________________________________</label>
+        @* Load Item (READ) *@
+        <div class="row justify-content-center align-items-center p-1">
+            <form method="post" action="/Item/ProcessLoadForm">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label asp-for="Id"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" id="loadItemId" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" style="color: black">Load</button>
+            </form>
+        </div>
+
+       
+
+        <div class="row justify-content-center align-items-center p-1">
+            <a asp-area="" asp-controller="Item" asp-action="LoadAllItemsAsJson" class="btn">Load All Items in JSON page</a>
+        </div>
+
+        @* Dit is een testknop die nog niet werkt *@
+       @* <div class="row justify-content-center align-items-center p-1">
+            <a asp-area="" asp-controller="Item" asp-action="ItemModelTest" class="btn testButton">Load All Items in model view</a>
+        </div>
+*@
+
+        <div class="row justify-content-center align-items-center p-1">
+            <a asp-area="" asp-controller="Item" asp-action="LoadItemsAsObjects" class="btn">Load All Items as objects</a>
+        </div>
+        
+        <label>__________________________________________________________________________________________________________________________________________________________________</label>        @* Edit Item (UPDATE) *@
+        @* Edit Item (UPDATE) *@
+        <div class="row justify-content-center align-items-center p-1">
+            <form method="post" action="/Item/ProcessEditForm">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label asp-for="Id"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" id="editId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" id="editName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" id="editPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Discount"></label>
+                    <input asp-for="Discount" class="form-control" />
+                    <span asp-validation-for="Discount" id="editDiscount" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" style="color: black">Update</button>
+            </form>
+        </div>
+        <label>__________________________________________________________________________________________________________________________________________________________________</label>        @* Remove Item (DELETE)*@
+        @* 'Remove Item (DELETE) *@
+        <div class="row justify-content-center align-items-center p-1">
+            <form method="post" action="/Item/ProcessDeletionForm">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label asp-for="Id"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" id="deleteItemId" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" style="color: black">Delete</button>
+            </form>
+        </div>
+        <label>__________________________________________________________________________________________________________________________________________________________________</label>
+    </div>
+</body>
+</html>

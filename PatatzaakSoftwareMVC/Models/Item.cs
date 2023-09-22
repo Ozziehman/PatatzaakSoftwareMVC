@@ -20,7 +20,7 @@ namespace PatatzaakSoftwareMVC.Models
         [Required]
         public float Price { get; set; } 
 
-        public float? Discount { get; set; }
+        public float Discount { get; set; }
    
        
         public void AddDiscount()
@@ -106,8 +106,7 @@ namespace PatatzaakSoftwareMVC.Models
             using (var dbContext = new MainDb())
             {
                 var itemToEdit = dbContext.items.Where(item => item.Id == itemToEditId).FirstOrDefault();
-
-                if (itemToEdit != null)
+                
                 {
                     //THIS IS AN EXAMPLE EDIT
                     if(!NewName.IsNullOrEmpty())
@@ -126,10 +125,7 @@ namespace PatatzaakSoftwareMVC.Models
                     int result = dbContext.SaveChanges();
                     return result;
                 }
-                else
-                {
-                    return 0;
-                }
+               
             }
 
         }

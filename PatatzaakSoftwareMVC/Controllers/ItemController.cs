@@ -41,14 +41,13 @@ namespace PatatzaakSoftwareMVC.Controllers
 
         //AL OF THESE HttpContext.Request.Form should be replaced with the use of a model, which i am still struggling with
         //CREATE
-        public IActionResult CreateItem()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateItem(Item item)
         {
-            string Name = HttpContext.Request.Form["ItemName"];
-            float Price= float.Parse(HttpContext.Request.Form["ItemPrice"]);
-            float Discount = float.Parse(HttpContext.Request.Form["ItemDiscount"]);
+            
 
-
-            if (new Item().CreateItem(Name, Price, Discount) > 0)
+            if (new Item().CreateItem(item.Name, item.Price, item.Discount) > 0)
             {
                 _logger.LogInformation("Item created");
             }
@@ -56,14 +55,16 @@ namespace PatatzaakSoftwareMVC.Controllers
             {
                 _logger.LogInformation("Item not created");
             }
-            return View("~/Views/Customer/CRUDItemPage.cshtml");
+            return View("~/Views/ItemCRUD/CRUDItemPage.cshtml");
         }
 
         //READ
-        public IActionResult ProcessLoadForm()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ProcessLoadForm(Item item)
         {
-            string itemToLoadId = HttpContext.Request.Form["ItemToLoadId"];
-            return View("~/Views/DataViews/ItemJsonDataView.cshtml", new Item().LoadItemById(int.Parse(itemToLoadId)));
+            int itemToLoadId = item.Id;
+            return View("~/Views/DataViews/ItemJsonDataView.cshtml", new Item().LoadItemById(itemToLoadId));
         }
         
         public IActionResult LoadAllItemsAsJson()
@@ -77,32 +78,35 @@ namespace PatatzaakSoftwareMVC.Controllers
         }
 
         //UPDATE
-        public IActionResult ProcessEditForm()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ProcessEditForm(Item item)
         {
             float NewPriceFloat = 0;
             float NewDiscountFloat = 0;
 
              //Convert everything to something the EditItemById method can use
-            int itemToEditId = int.Parse(HttpContext.Request.Form["ItemToEditId"]);
-            string? NewName = HttpContext.Request.Form["ItemNewName"];
+            int itemToEditId = item.Id;
+            string? NewName = item.Name;
             if (NewName.IsNullOrEmpty())
             {
                 _logger.LogInformation("No new name entered");
             }
-            string? NewPrice = HttpContext.Request.Form["ItemNewPrice"];
-            if (!NewPrice.IsNullOrEmpty())
+            
+            float NewPrice = item.Price;
+            if (NewPrice != 0 && !HttpContext.Request.Form["editPrice"].IsNullOrEmpty())
             {
-                NewPriceFloat = float.Parse(NewPrice);
+                NewPriceFloat = NewPrice;
+                Console.WriteLine("Succes");
             }
             else
             {
                 _logger.LogInformation("No new price entered");
             }
 
-            string? NewDiscount = HttpContext.Request.Form["ItemNewDiscount"];
-            if (!NewDiscount.IsNullOrEmpty())
+            if (!!HttpContext.Request.Form["editDiscount"].IsNullOrEmpty())
             {
-                NewDiscountFloat = float.Parse(NewDiscount);
+                NewDiscountFloat =  item.Discount;
             }
             else
             {
@@ -119,15 +123,17 @@ namespace PatatzaakSoftwareMVC.Controllers
                 _logger.LogInformation("item not found/edit failed/No actual change entered");
             }
                 
-            return View("~/Views/Customer/CRUDItemPage.cshtml");
+            return View("~/Views/ItemCRUD/CRUDItemPage.cshtml");
         }
 
         //DELETE
-        public IActionResult ProcessDeletionForm()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ProcessDeletionForm(Item item)
         {
-            string itemToDeleteId = HttpContext.Request.Form["ItemToDeleteId"];
+            int itemToDeleteId = item.Id;
 
-            if (new Item().DeleteItemById(int.Parse(itemToDeleteId)) > 0)
+            if (new Item().DeleteItemById(itemToDeleteId) > 0)
             {
                 _logger.LogInformation("item found and deleted");
             }
@@ -135,7 +141,7 @@ namespace PatatzaakSoftwareMVC.Controllers
             {
                 _logger.LogInformation("item not found/delete failed");
             }
-            return View("~/Views/Customer/CRUDItemPage.cshtml");
+            return View("~/Views/ItemCRUD/CRUDItemPage.cshtml");
         }
 
     }

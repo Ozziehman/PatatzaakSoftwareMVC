@@ -19,7 +19,7 @@ namespace PatatzaakSoftwareMVC.Controllers
         }
         public IActionResult CRUDItemPage()
         {
-            return View("~/Views/Customer/CRUDItemPage.cshtml");
+            return View("~/Views/ItemCRUD/CRUDItemPage.cshtml");
         }
 
         [HttpPost]

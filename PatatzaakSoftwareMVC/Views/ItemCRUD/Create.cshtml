@@ -1,0 +1,26 @@
+﻿
+@model PatatzaakSoftwareMVC.Models.Item;
+@* Create Item (CREATE) *@
+<div class="row justify-content-center align-items-center p-1">
+    <form method="post" action="/Item/CreateItem">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Discount"></label>
+            <input asp-for="Discount" class="form-control" />
+            <span asp-validation-for="Discount" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="color: black">Create</button>
+    </form>
+</div>
