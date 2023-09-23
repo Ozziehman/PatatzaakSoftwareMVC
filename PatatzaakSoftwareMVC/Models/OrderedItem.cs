@@ -15,9 +15,10 @@ namespace PatatzaakSoftwareMVC.Models
 
         [Required]   
         public Item? Item { get; set; }
-
+        public int ItemId { get; set; }
         [Required]
         public Order? Order { get; set; }
+        public int OrderId { get; set; }
 
 
 

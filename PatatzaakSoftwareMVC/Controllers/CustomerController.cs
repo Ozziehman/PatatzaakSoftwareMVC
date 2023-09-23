@@ -47,7 +47,7 @@ namespace PatatzaakSoftwareMVC.Controllers
             //So if You want all the orderedItem(.Item) that belong to a specific order you should do a   _context.Where(oi => oi.Order.Id == orderId)
             if (result > 0)
             {
-                _logger.LogInformation($"filling order with item {itemId} on order with order id: {orderId}");
+                _logger.LogInformation($"filling order with item {newOrderedItem.Item.Id} on order with order id: {newOrderedItem.Order.Id}");
             }
             else
             {
@@ -59,18 +59,42 @@ namespace PatatzaakSoftwareMVC.Controllers
 
         public IActionResult PlaceOrder(int orderId)
         {
-            Order order = _context.orders.Find(orderId);
+            var order = _context.orders.Find(orderId);
             order.Status = "Placed";
+            List<OrderedItem> orderedItemsInOrder = _context.orderedItems.Where(o => o.OrderId == orderId).ToList();
+           
             int result = _context.SaveChanges();
             if (result > 0)
             {
-                _logger.LogInformation($"Order with id {orderId} has been placed");
-                return Json(new { success = true, message = $"Order placed and orderstatus of order with Id {orderId} changed to 'Placed'" });
+
+                List<object> orderedItemInfoList = new List<object>();
+
+                foreach (OrderedItem orderedItem in orderedItemsInOrder)
+                {
+                    var item = _context.items.Find(orderedItem.ItemId);
+
+                    orderedItemInfoList.Add(new //object
+                    {
+                        Id = item.Id,
+                        Name = item.Name
+                    });
+                }
+
+                var response = new
+                {
+                    success = true,
+                    message = $"Order placed and order status of order with Id {orderId} changed to 'Placed'",
+                    orderedItems = orderedItemInfoList 
+                };
+
+                return Json(response);
+
+                //Need to go to a confirmation page after this, that confirms your order is placed
             }
             else
             {
                 _logger.LogInformation($"Failed");
-                return Json(new { success = true, message = $"Failed to place order OR order is duplicate" });
+                return Json(new { success = false, message = $"Failed to place order OR order is duplicate" });
             }
         }
     }
