@@ -10,87 +10,87 @@ using PatatzaakSoftwareMVC.Models;
 
 namespace PatatzaakSoftwareMVC.Controllers
 {
-    public class GeneratedItemController : Controller
+    public class UsersController : Controller
     {
         private readonly MainDb _context;
 
-        public GeneratedItemController(MainDb context)
+        public UsersController(MainDb context)
         {
             _context = context;
         }
 
-        // GET: GeneratedItem
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-              return _context.items != null ? 
-                          View(await _context.items.ToListAsync()) :
-                          Problem("Entity set 'MainDb.items'  is null.");
+              return _context.users != null ? 
+                          View(await _context.users.ToListAsync()) :
+                          Problem("Entity set 'MainDb.users'  is null.");
         }
 
-        // GET: GeneratedItem/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.items == null)
+            if (id == null || _context.users == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.items
+            var user = await _context.users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (item == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(user);
         }
 
-        // GET: GeneratedItem/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: GeneratedItem/Create
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ImagePath,Price,Discount")] Item item)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,Password,Points,IsAdmin")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(item);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(user);
         }
 
-        // GET: GeneratedItem/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.items == null)
+            if (id == null || _context.users == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.items.FindAsync(id);
-            if (item == null)
+            var user = await _context.users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(item);
+            return View(user);
         }
 
-        // POST: GeneratedItem/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImagePath,Price,Discount")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Password,Points,IsAdmin")] User user)
         {
-            if (id != item.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace PatatzaakSoftwareMVC.Controllers
             {
                 try
                 {
-                    _context.Update(item);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.Id))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace PatatzaakSoftwareMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(user);
         }
 
-        // GET: GeneratedItem/Delete/5
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.items == null)
+            if (id == null || _context.users == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.items
+            var user = await _context.users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (item == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(user);
         }
 
-        // POST: GeneratedItem/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.items == null)
+            if (_context.users == null)
             {
-                return Problem("Entity set 'MainDb.items'  is null.");
+                return Problem("Entity set 'MainDb.users'  is null.");
             }
-            var item = await _context.items.FindAsync(id);
-            if (item != null)
+            var user = await _context.users.FindAsync(id);
+            if (user != null)
             {
-                _context.items.Remove(item);
+                _context.users.Remove(user);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ItemExists(int id)
+        private bool UserExists(int id)
         {
-          return (_context.items?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

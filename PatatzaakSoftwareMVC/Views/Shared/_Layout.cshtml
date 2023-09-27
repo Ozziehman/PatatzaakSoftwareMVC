@@ -9,28 +9,32 @@
     <link rel="stylesheet" href="~/PatatzaakSoftwareMVC.styles.css" asp-append-version="true" />
     <script src="~/js/site.js"></script>
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background: linear-gradient(90deg, rgba(52,52,52,1) 0%, rgba(18,18,20,1) 100%);">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PatatzaakSoftware</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: white">PatatzaakSoftware</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="background: transparent;">
+                    <ul class="navbar-nav flex-grow-1" >
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><label class="navcomponent">Home</label></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action="">Company</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action=""><label class="navcomponent">Company</label></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index"><label class="navcomponent">Customer</label></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GeneratedItem" asp-action="Index">CRUDItem</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Index"><label class="navcomponent">Item_CRUD</label></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index"><label class="navcomponent">User_CRUD</label></a>
                         </li>
                     </ul>
                 </div>
@@ -48,3 +52,5 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+

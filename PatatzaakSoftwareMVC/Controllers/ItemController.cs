@@ -1,148 +1,163 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor.Compilation;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using PatatzaakSoftwareMVC.Data;
 using PatatzaakSoftwareMVC.Models;
 
-
 namespace PatatzaakSoftwareMVC.Controllers
-
 {
-    //_____________________________________________________________________________
-    //This is the Item controller i made myself to understand MVC better    
-    //_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_
-    //I later figured out i used the DbContext in a inconvenient way so the plan is
-    //To switch to a different method that works with the generated CRUD page from EF
-    //This would be a way friendlier development environment
-    //
-    //
-    //This controller would still work if using the commented out code block from ~/Data/MainDb.cs but i switched to DI for accessing the database, please go to GeneratedItemController.cs for the working CRUD controller
-    //_____________________________________________________________________________
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*public class ItemController : Controller
+    public class ItemController : Controller
     {
-        private readonly ILogger<ItemController> _logger;
-        public ItemController(ILogger<ItemController> logger)
+        private readonly MainDb _context;
+
+        public ItemController(MainDb context)
         {
-            _logger = logger;
+            _context = context;
         }
-        public IActionResult Index()
+
+        // GET: ItemController
+        public async Task<IActionResult> Index()
         {
-            return View("~/Views/Company/CRUDItemPage.cshtml");
-        }*/
-
-
-
-    //Old testing code with other DBContext method
-    /*
-            //CREATE
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public IActionResult CreateItem(Item item)
-            {
-
-
-                if (new Item().CreateItem(item.Name, item.Price, item.Discount) > 0)
-                {
-                    _logger.LogInformation("Item created");
-                }
-                else
-                {
-                    _logger.LogInformation("Item not created");
-                }
-                return View("~/Views/ItemCRUD/CRUDItemPage.cshtml");
-            }
-
-            //READ
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public IActionResult ProcessLoadForm(Item item)
-            {
-                int itemToLoadId = item.Id;
-                return View("~/Views/DataViews/ItemJsonDataView.cshtml", new Item().LoadItemById(itemToLoadId));
-            }
-
-            public IActionResult LoadAllItemsAsJson()
-            {           
-                return View("~/Views/DataViews/ItemJsonDataView.cshtml", new Item().LoadItems());
-            }
-
-            public IActionResult LoadItemsAsObjects()
-            {        
-                return View("~/Views/DataViews/ItemObjectDataView.cshtml", new Item().LoadItemsObject());      
-            }
-
-            //UPDATE
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public IActionResult ProcessEditForm(Item item)
-            {
-                float NewPriceFloat = item.Price;
-                float NewDiscountFloat = item.Discount;
-                int itemToEditId = item.Id;
-                string? NewName = item.Name;
-
-                if (new Item().EditItemById(itemToEditId, NewName, NewPriceFloat, NewDiscountFloat) > 0)
-                {
-                    _logger.LogInformation("item found and edited");
-                }
-                else
-                {
-                    _logger.LogInformation("item not found/edit failed/No actual change entered");
-                }
-
-                return View("~/Views/ItemCRUD/CRUDItemPage.cshtml");
-            }
-
-            //DELETE
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public IActionResult ProcessDeletionForm(Item item)
-            {
-                int itemToDeleteId = item.Id;
-
-                if (new Item().DeleteItemById(itemToDeleteId) > 0)
-                {
-                    _logger.LogInformation("item found and deleted");
-                }
-                else
-                {
-                    _logger.LogInformation("item not found/delete failed");
-                }
-                return View("~/Views/ItemCRUD/CRUDItemPage.cshtml");
-            }
-
+              return _context.items != null ? 
+                          View(await _context.items.ToListAsync()) :
+                          Problem("Entity set 'MainDb.items'  is null.");
         }
-    */
+
+        // GET: ItemController/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.items == null)
+            {
+                return NotFound();
+            }
+
+            var item = await _context.items
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return View(item);
+        }
+
+        // GET: ItemController/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: ItemController/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name,ImagePath,Price,Discount")] Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(item);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+        }
+
+        // GET: ItemController/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.items == null)
+            {
+                return NotFound();
+            }
+
+            var item = await _context.items.FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return View(item);
+        }
+
+        // POST: ItemController/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImagePath,Price,Discount")] Item item)
+        {
+            if (id != item.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(item);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ItemExists(item.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+        }
+
+        // GET: Item/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.items == null)
+            {
+                return NotFound();
+            }
+
+            var item = await _context.items
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return View(item);
+        }
+
+        // POST: Item/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.items == null)
+            {
+                return Problem("Entity set 'MainDb.items'  is null.");
+            }
+            var item = await _context.items.FindAsync(id);
+            if (item != null)
+            {
+                _context.items.Remove(item);
+            }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ItemExists(int id)
+        {
+          return (_context.items?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+    }
 }

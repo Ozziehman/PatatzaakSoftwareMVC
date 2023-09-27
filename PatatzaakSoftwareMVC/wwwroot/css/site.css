@@ -50,8 +50,26 @@ h1 {
     border-radius: 5px;
 }
 
+th {
+    color: white;
+}
+td {
+    color: white;
+}
+
+.navcomponent {
+    color: white;
+
+    
+}
+
+.navcomponent:hover{
+    cursor: pointer;
+}
+
 body {
-    background-color: lightgrey;
+    background: linear-gradient(90deg, rgba(18,18,20,1) 0%, rgba(42,42,52,1) 42%);
+    color: white;
 }
 
 .order-button {
