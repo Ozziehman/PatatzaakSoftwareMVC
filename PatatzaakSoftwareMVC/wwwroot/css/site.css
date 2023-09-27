@@ -28,15 +28,26 @@ h1 {
 }
 
 .btn {
-    background-color: lightgrey;
+    color: white;
+    background: linear-gradient(90deg, rgba(29,29,29,1) 0%, rgba(55,55,55,1) 0%, rgba(57,57,57,1) 0%);
     border-color: black;
     border-width: 2px;
+    transition: all 0.3s ease;
 }
 
-    .btn:hover {
-        background-color: grey;
-        color: white;
-    }
+.btn {
+    margin-top: 2px;
+    color: white;
+    background: linear-gradient(90deg, rgba(29, 29, 29, 1) 0%, rgba(55, 55, 55, 1) 0%, rgba(57, 57, 57, 1) 0%);
+    border-color: black;
+    border-width: 2px;
+    transition: all 0.3s ease; 
+}
+
+.btn:hover {
+    background: white;
+    color:black
+}
 
 .homemessage {
     text-align: center;
