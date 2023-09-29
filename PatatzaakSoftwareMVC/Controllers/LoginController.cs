@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using NuGet.Protocol;
 using PatatzaakSoftwareMVC.Data;
 using PatatzaakSoftwareMVC.Models;
@@ -15,8 +16,7 @@ namespace PatatzaakSoftwareMVC.Controllers
 
         private readonly MainDb _context;
         private readonly ILogger<LoginController> _logger;
-        public const string SessionKeyName = "_Name";
-        public const string SessionKeyEmail = "_Email";
+
 
         public LoginController(MainDb context, ILogger<LoginController> logger)
         {
@@ -35,15 +35,12 @@ namespace PatatzaakSoftwareMVC.Controllers
             {
                 var sessionUser = GetUser(user.Email);
 
-                var sessionUserEmail = sessionUser.Email;
-                var sessionUserName = sessionUser.Name;
-                var sessionUserPoints = sessionUser.Points;
 
+                var userJson = JsonConvert.SerializeObject(sessionUser);
                 //store user into sessionstorage
-                HttpContext.Session.SetString(SessionKeyName, sessionUserName);
-                HttpContext.Session.SetString(SessionKeyEmail, sessionUserEmail);
-
-                _logger.LogInformation($"Session user name: {HttpContext.Session.GetString(SessionKeyName)}");
+                HttpContext.Session.SetString("User", userJson);
+                
+                _logger.LogInformation($"Session user name: {HttpContext.Session.GetString("User")}");
 
                 return RedirectToAction("Index", "Home");
             }
