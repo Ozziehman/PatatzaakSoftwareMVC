@@ -16,7 +16,7 @@ namespace PatatzaakSoftwareMVC.Models
         public float TotalPrice { get; set; }
 
         [Required]
-        public DateTime TimePlaced { get; set; }
+        public DateTime TimePlaced { get; set; } = DateTime.Now;
 
         public bool Finished { get; set; }
         public string? Status { get; set; } = "BeingChosen"; //1: BeingChosen
