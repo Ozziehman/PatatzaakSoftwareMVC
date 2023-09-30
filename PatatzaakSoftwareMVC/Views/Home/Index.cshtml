@@ -1,12 +1,16 @@
-﻿
+﻿@using Newtonsoft.Json
+
 @{
     ViewData["Title"] = "Home Page";
-    var currentUser = ViewBag.User;
+    string jsonString = Context.Session.GetString("User");
+
+    // Deserialize the JSON string into a User object
+    User user = JsonConvert.DeserializeObject<User>(jsonString);
 }
 
 <body>
     <div class="container-sm homemessage">
-        <label>Welcome @currentUser</label>
+        <label>Welcome @user.Name</label>
        @*  make this a page to login where the user is stored in the sessionstorage, depending on who the user is make the navbar fit to the role the user has *@
     </div>
 </body>

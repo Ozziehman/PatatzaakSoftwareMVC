@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+@{
+    User user = null;
+    if (Context.Session.GetString("User") != null)
+    {
+        string jsonString = Context.Session.GetString("User");
+
+        // Deserialize the JSON string into a User object
+        user = JsonConvert.DeserializeObject<User>(jsonString);
+    }
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -36,6 +49,20 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index"><label class="navcomponent">User_CRUD</label></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <div class="nav-link text-white">
+                                @if (user != null)
+                                {
+                                    <span>@user.Name</span>
+                                }
+                                else
+                                {
+                                    <span>No user logged in</span>
+                                }
+                            </div>
                         </li>
                     </ul>
                 </div>
