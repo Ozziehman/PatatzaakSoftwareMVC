@@ -41,8 +41,8 @@ namespace PatatzaakSoftwareMVC.Controllers
                 HttpContext.Session.SetString("User", userJson);
                 
                 _logger.LogInformation($"Session user name: {HttpContext.Session.GetString("User")}");
-
-                return RedirectToAction("Index", "Home");
+                ViewBag.User = userJson;
+                return View("~/Views/Home/Index.cshtml");
             }
             else
             {
