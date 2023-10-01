@@ -15,28 +15,57 @@
     </div>
     <div class="row">
        @*  Placed Orders *@
-        <div class="col-md-8">
+       
+        <div class="col-md-9">
+            <div class="header-label">Placed Orders</div>
+            <div id="orderList">
             @if(placedOrders != null)
             {
                 @foreach(Order order in placedOrders)
                 {
-                    <div class="col-md-2 text-center itemCol p-2" style="display: inline-block;">
-                        <button onclick="ReadyOrder('@order.Id')">@order.Id</button>
-                    </div>
+                        <div class="col-md-2 text-center itemCol p-1" style="display: inline-block;">
+                            <div class="dropdown" onmouseover="showDropdown('@order.Id')" onmouseout="hideDropdown('@order.Id')">
+                                <button class="btn order-btn" onclick="CompleteOrder('@order.Id')">@order.Id</button>
+                                <div id="dropdownContent-@order.Id" class="dropdown-content">
+                                    <p style="color: black; font-weight: bold;">Order ID: @order.Id</p>
+                                    @foreach (var item in Model.GetItemsForOrder(@order.Id))
+                                    {
+                                        <p style="color: black">@item.Name - &#8364 @item.Price</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
                 }
             }
+            </div>
         </div>
 
        @*  Ready Orders *@
-        @if (readyOrders != null)
-        {
-            @foreach (Order order in readyOrders)
+        
+        <div  class="col-md-3">
+            <div  class="header-label">Ready Orders</div>
+            <div id ="orderList">
+            @if (readyOrders != null)
             {
-                <div class="col-md-2 text-center itemCol p-2" style="display: inline-block;">
-                    <button onclick="CompleteOrder('@order.Id')">@order.Id</button>
-                </div>
+                @foreach (Order order in readyOrders)
+                {
+                        <div class="col-md-5 text-center itemCol p-3" style="display: inline-block;">
+                            <div class="dropdown" onmouseover="showDropdown('@order.Id')" onmouseout="hideDropdown('@order.Id')">
+                                <button class="btn order-btn" onclick="CompleteOrder('@order.Id')">@order.Id</button>
+                                <div id="dropdownContent-@order.Id" class="dropdown-content">
+                                    <p style="color: black; font-weight: bold;">Order ID: @order.Id</p>
+                                    @foreach (var item in Model.GetItemsForOrder(@order.Id))
+                                    {
+                                        <p style="color: black">@item.Name - &#8364 @item.Price</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                }
             }
-        }
+            </div>
+        </div>
         
            
     </div>

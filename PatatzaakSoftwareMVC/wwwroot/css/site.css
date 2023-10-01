@@ -27,13 +27,7 @@ body {
 h1 {
 }
 
-.btn {
-    color: white;
-    background: linear-gradient(90deg, rgba(29,29,29,1) 0%, rgba(55,55,55,1) 0%, rgba(57,57,57,1) 0%);
-    border-color: black;
-    border-width: 2px;
-    transition: all 0.3s ease;
-}
+
 
 .btn {
     margin-top: 2px;
@@ -47,6 +41,14 @@ h1 {
 .btn:hover {
     background: white;
     color:black
+}
+.order-btn {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 15px 30px; 
+    cursor: pointer;
+    font-size: 50px; 
 }
 
 .homemessage {
@@ -137,4 +139,53 @@ body {
 
 ::-webkit-scrollbar-track {
     background-color: transparent;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.btn {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
+    width: 300px;
+    max-height: 200px; 
+    overflow-y: auto; 
+}
+
+.dropdown-content p {
+    margin: 0;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content p:last-child {
+    border-bottom: none;
+}
+
+.header-label {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+#orderList{
+    max-height: 75vh;
+    overflow-y: auto;
 }

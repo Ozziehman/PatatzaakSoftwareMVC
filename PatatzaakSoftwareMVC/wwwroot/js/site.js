@@ -112,6 +112,7 @@ function PlaceOrderButtonClicked(orderId) {
         data: { orderId: orderId },
         success: function (response) {
             console.log(response);
+            handleSuccessResponse(response);
         }
     });
 }
@@ -153,4 +154,19 @@ function CompleteOrder(orderId) {
             handleSuccessResponse(response);
         }
     });
+}
+
+
+function showDropdown(orderId) {
+    var dropdownContent = document.getElementById("dropdownContent-" + orderId);
+    if (dropdownContent) {
+        dropdownContent.style.display = "block";
+    }
+}
+
+function hideDropdown(orderId) {
+    var dropdownContent = document.getElementById("dropdownContent-" + orderId);
+    if (dropdownContent) {
+        dropdownContent.style.display = "none";
+    }
 }
