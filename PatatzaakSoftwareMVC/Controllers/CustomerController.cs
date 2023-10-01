@@ -90,7 +90,6 @@ namespace PatatzaakSoftwareMVC.Controllers
                     success = true,
                     message = $"Order placed and order status of order with Id {orderId} changed to 'Placed'",
                     orderedItems = orderedItemInfoList,
-                    refreshPage = true
                 };
 
                 return Json(response);

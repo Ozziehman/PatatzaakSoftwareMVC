@@ -45,19 +45,14 @@
                     <span id="dummySpan">nog geen items in bestelling</span>
                 </div>
                 <div class="col">
-                    <div class="btn" onclick="PlaceOrderButtonClicked('@sessionOrder.Id');">Place Order</div>
+                    <div class="btn" Id="placeOrderButton" onclick="PlaceOrderButtonClicked('@sessionOrder.Id');">Place Order</div>
                 </div>
-               @* <div class="container-fluid p-5 text-center">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="~/Resources/Images/Checkmark.png" class="mw-100 h-auto">
-                        </div>
-                        <div class="col-md-9">
-                            <p>Bestelling is geplaatst</p>
-                            <p1>Nummer: </p1>
-                        </div>
-                    </div>
-                </div>*@
+                <div id="messageDiv" style="text-align: center; display: none">
+                    <span style="color: lightgreen; font-weight: bold; font-size: 18px;">Order placed! Number: @sessionOrder.Id</span>
+                    <br>
+                    <img src="~/Resources/Images/Checkmark.png" style="max-width: 100px; max-height: 100px;" alt="Checkmark" />
+                </div>
+
             </div>
         </div>
     </div>

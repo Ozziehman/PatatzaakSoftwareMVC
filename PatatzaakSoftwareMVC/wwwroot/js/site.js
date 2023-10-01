@@ -112,10 +112,19 @@ function PlaceOrderButtonClicked(orderId) {
         data: { orderId: orderId },
         success: function (response) {
             console.log(response);
-            handleSuccessResponse(response);
+            var button = document.getElementById("placeOrderButton");
+            button.disabled = true;
+            button.style.display = "none";
+
+            var message = document.getElementById("messageDiv");
+            message.style.display = "block";
+
+            var menu = document.getElementById("menuColumn");
+            menu.style.display = "none";
         }
     });
 }
+
 
 function handleSuccessResponse(response) {
     if (response.success) {
