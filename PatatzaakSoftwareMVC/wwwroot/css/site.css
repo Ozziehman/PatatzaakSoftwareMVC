@@ -72,8 +72,6 @@ td {
 
 .navcomponent {
     color: white;
-
-    
 }
 
 .navcomponent:hover{
@@ -141,18 +139,8 @@ body {
     background-color: transparent;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
 
-.btn {
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
+
 
 .dropdown-content {
     display: none;
@@ -188,6 +176,6 @@ body {
 }
 
 #orderList{
-    max-height: 70vh;
+    height: 70vh;
     overflow-y: auto;
 }
