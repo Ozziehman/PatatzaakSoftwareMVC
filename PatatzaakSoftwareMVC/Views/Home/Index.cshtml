@@ -3,14 +3,20 @@
 @{
     ViewData["Title"] = "Home Page";
     string jsonString = Context.Session.GetString("User");
-
-    // Deserialize the JSON string into a User object
-    User user = JsonConvert.DeserializeObject<User>(jsonString);
+    // Deserialize the JSON string into a User object if jsonString is not null
+    User user = jsonString != null ? JsonConvert.DeserializeObject<User>(jsonString) : null;
 }
 
 <body>
     <div class="container-sm homemessage">
-        <label>Welcome @user.Name</label>
-       @*  make this a page to login where the user is stored in the sessionstorage, depending on who the user is make the navbar fit to the role the user has *@
+        @if (user != null)
+        {
+            <span>Welcome @user.Name</span>
+        }
+        else
+        {
+            <span>Log in please: <a href="/Login">Login</a></span>
+
+        }
     </div>
 </body>
