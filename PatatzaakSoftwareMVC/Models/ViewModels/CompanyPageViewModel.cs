@@ -15,5 +15,10 @@ namespace PatatzaakSoftwareMVC.Models.ViewModels
             List<Order> orders = _context.orders.Where(o => o.Status == "Placed").ToList();
             return orders;
         }
+        public List<Order> GetReadyOrders()
+        {
+            List<Order> orders = _context.orders.Where(o => o.Status == "Ready").ToList();
+            return orders;
+        }
     }
 }

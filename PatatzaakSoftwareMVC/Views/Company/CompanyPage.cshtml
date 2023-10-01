@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Company";
+    var placedOrders = Model.GetPlacedOrders();
+    var readyOrders = Model.GetReadyOrders();
 }
 
 <div class="container">
@@ -12,22 +14,30 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Placed Orders ID's</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach(var order in Model.GetPlacedOrders())
-                    {
-                        <tr>
-                            <td>@order.Id</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+       @*  Placed Orders *@
+        <div class="col-md-8">
+            @if(placedOrders != null)
+            {
+                @foreach(Order order in placedOrders)
+                {
+                    <div class="col-md-2 text-center itemCol p-2" style="display: inline-block;">
+                        <button onclick="ReadyOrder('@order.Id')">@order.Id</button>
+                    </div>
+                }
+            }
         </div>
+
+       @*  Ready Orders *@
+        @if (readyOrders != null)
+        {
+            @foreach (Order order in readyOrders)
+            {
+                <div class="col-md-2 text-center itemCol p-2" style="display: inline-block;">
+                    <button onclick="CompleteOrder('@order.Id')">@order.Id</button>
+                </div>
+            }
+        }
+        
+           
     </div>
 </div>

@@ -115,3 +115,42 @@ function PlaceOrderButtonClicked(orderId) {
         }
     });
 }
+
+function handleSuccessResponse(response) {
+    if (response.success) {
+        console.log(response.message);
+
+        // Check if the server indicated a page refresh
+        if (response.refreshPage) {
+            // Refresh the page
+            location.reload(true);
+        }
+    } else {
+        // Handle failure
+        console.error(response.message);
+    }
+}
+
+function ReadyOrder(orderId) {
+    $.ajax({
+        type: "POST",
+        url: '/Company/ReadyOrder',
+        data: { orderId: orderId },
+        success: function (response) {
+            console.log(response);
+            handleSuccessResponse(response);
+        }
+    });
+}
+
+function CompleteOrder(orderId) {
+    $.ajax({
+        type: "POST",
+        url: '/Company/CompleteOrder',
+        data: { orderId: orderId },
+        success: function (response) {
+            console.log(response);
+            handleSuccessResponse(response);
+        }
+    });
+}

@@ -21,8 +21,8 @@ namespace PatatzaakSoftwareMVC.Models
         public bool Finished { get; set; }
         public string? Status { get; set; } = "BeingChosen"; //1: BeingChosen
                                                              //2: Placed
-                                                             //3: Completed
-                                                             //4: Cancelled      
+                                                             //3: Ready
+                                                             //4: Completed    
         
         public User? user { get; set; }
         public ICollection<OrderedItem>? OrderedItems { get; set; }
