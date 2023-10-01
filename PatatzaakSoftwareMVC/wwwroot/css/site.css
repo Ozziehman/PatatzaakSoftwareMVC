@@ -129,7 +129,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 12px;
-    border-radius: 10px;  
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -163,8 +163,10 @@ body {
     padding: 10px;
     z-index: 1;
     width: 300px;
-    max-height: 200px; 
-    overflow-y: auto; 
+    max-height: 200px;
+    overflow-y: auto;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .dropdown-content p {
@@ -186,6 +188,6 @@ body {
 }
 
 #orderList{
-    max-height: 75vh;
+    max-height: 70vh;
     overflow-y: auto;
 }
