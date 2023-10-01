@@ -31,5 +31,12 @@ namespace PatatzaakSoftwareMVC.Models.ViewModels
             }
             return itemListForOrder;
         }
+
+        public string GetCustomerNameForOrder(int Id)
+        {
+            var order = _context.orders.Find(Id);
+            var user = _context.users.Find(order.UserId);
+            return user.Name;
+        }
     }
 }

@@ -12,8 +12,8 @@ using PatatzaakSoftwareMVC.Data;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     [DbContext(typeof(MainDb))]
-    [Migration("20230923082135_MigrationTest")]
-    partial class MigrationTest
+    [Migration("20231001145221_InitialDbBuild")]
+    partial class InitialDbBuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,12 +74,12 @@ namespace PatatzaakSoftwareMVC.Migrations
                     b.Property<float>("TotalPrice")
                         .HasColumnType("real");
 
-                    b.Property<int?>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("orders");
                 });
@@ -172,11 +172,13 @@ namespace PatatzaakSoftwareMVC.Migrations
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Order", b =>
                 {
-                    b.HasOne("PatatzaakSoftwareMVC.Models.User", "user")
+                    b.HasOne("PatatzaakSoftwareMVC.Models.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("userId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.OrderedItem", b =>

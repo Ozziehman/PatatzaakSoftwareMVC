@@ -1,4 +1,5 @@
-﻿using PatatzaakSoftwareMVC.Data;
+﻿using Humanizer.Localisation.TimeToClockNotation;
+using PatatzaakSoftwareMVC.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,7 +25,8 @@ namespace PatatzaakSoftwareMVC.Models
                                                              //3: Ready
                                                              //4: Completed    
         
-        public User? user { get; set; }
+        public User? User { get; set; }
+        public int UserId { get; set; }
         public ICollection<OrderedItem>? OrderedItems { get; set; }
 
         public Order()

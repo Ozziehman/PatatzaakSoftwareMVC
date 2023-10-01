@@ -53,16 +53,18 @@ namespace PatatzaakSoftwareMVC.Migrations
                     TotalPrice = table.Column<float>(type: "real", nullable: false),
                     TimePlaced = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Finished = table.Column<bool>(type: "bit", nullable: false),
-                    userId = table.Column<int>(type: "int", nullable: true)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_orders_users_userId",
-                        column: x => x.userId,
+                        name: "FK_orders_users_UserId",
+                        column: x => x.UserId,
                         principalTable: "users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,9 +126,9 @@ namespace PatatzaakSoftwareMVC.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orders_userId",
+                name: "IX_orders_UserId",
                 table: "orders",
-                column: "userId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_vouchers_userId",

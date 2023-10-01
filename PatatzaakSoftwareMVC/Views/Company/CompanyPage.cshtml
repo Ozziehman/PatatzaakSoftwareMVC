@@ -4,6 +4,7 @@
     ViewData["Title"] = "Company";
     var placedOrders = Model.GetPlacedOrders();
     var readyOrders = Model.GetReadyOrders();
+    
 }
 
 <div class="container">
@@ -27,6 +28,8 @@
                                 <button class="btn order-btn" onclick="ReadyOrder('@order.Id')">@order.Id</button>
                                 <div id="dropdownContent-@order.Id" class="dropdown-content">
                                     <p style="color: black; font-weight: bold;">Order ID: @order.Id</p>
+                                    <p style="color: black; font-weight: bold;">Customer Name: @Model.GetCustomerNameForOrder(order.Id)</p>
+
                                     @foreach (var item in Model.GetItemsForOrder(@order.Id))
                                     {
                                         <p style="color: black">@item.Name - &#8364 @item.Price</p>

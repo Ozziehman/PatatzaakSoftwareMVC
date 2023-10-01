@@ -1,4 +1,5 @@
 ﻿
+using Humanizer.Localisation.TimeToClockNotation;
 using PatatzaakSoftwareMVC.Data;
 
 namespace PatatzaakSoftwareMVC.Models.ViewModels
@@ -19,9 +20,10 @@ namespace PatatzaakSoftwareMVC.Models.ViewModels
         }
 
 
-        public Order CreateOrderObject()
+        public Order CreateOrderObject(int currentUserId)
         {
             Order order = new Order();
+            order.UserId = currentUserId;
             _context.Add(order);
             _context.SaveChanges();
 

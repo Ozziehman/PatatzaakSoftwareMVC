@@ -1,9 +1,19 @@
-﻿@using PatatzaakSoftwareMVC.Models.ViewModels
+﻿@using Newtonsoft.Json;
+@using PatatzaakSoftwareMVC.Models.ViewModels
 @model CustomerPageViewModel
 @{
+    /* Get the current user to make the order for */
+    int sessionUserId = 0;
+    var sessionUserJson = Context.Session.GetString("User");
 
-    var sessionOrder = Model.CreateOrderObject(); /*  this order object will have its Id passed to JS returning in the Controller with AJAX, then the controller will add the items to that orderId */
-}                                                                                                           
+    if (sessionUserJson != null)
+    {
+        var user = JsonConvert.DeserializeObject<User>(sessionUserJson);
+        sessionUserId = user.Id;
+    }
+    var sessionOrder = Model.CreateOrderObject(sessionUserId);
+     /*  this order object will have its Id passed to JS returning in the Controller with AJAX, then the controller will add the items to that orderId */
+}
 <html>                                                                                                      
 <body>
     <div class="container-fluid vh-80">

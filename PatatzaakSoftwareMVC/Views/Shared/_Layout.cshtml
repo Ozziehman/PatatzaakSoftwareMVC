@@ -24,6 +24,7 @@
     <script src="~/js/site.js"></script>
 </head>
 
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-white border-bottom box-shadow mb-3" style="background: linear-gradient(90deg, rgba(52,52,52,1) 0%, rgba(18,18,20,1) 100%);">
@@ -38,12 +39,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><label class="navcomponent">Home</label></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action="Index"><label class="navcomponent">Company</label></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index"><label class="navcomponent">Customer</label></a>
-                        </li>
+                        
+                        @if (Context.Session.GetString("User") != null && user.IsAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action="Index"><label class="navcomponent">Company</label></a>
+                            </li>
+                        }
+
+                        @if(Context.Session.GetString("User") != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index"><label class="navcomponent">Customer</label></a>
+                            </li>
+                        }
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Index"><label class="navcomponent">Item_CRUD</label></a>
                         </li>
