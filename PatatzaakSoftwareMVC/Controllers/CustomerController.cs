@@ -61,6 +61,7 @@ namespace PatatzaakSoftwareMVC.Controllers
         {
             var order = _context.orders.Find(orderId);
             order.Status = "Placed";
+
             List<OrderedItem> orderedItemsInOrder = _context.orderedItems.Where(o => o.OrderId == orderId).ToList();
            
             int result = _context.SaveChanges();
@@ -72,11 +73,15 @@ namespace PatatzaakSoftwareMVC.Controllers
                 foreach (OrderedItem orderedItem in orderedItemsInOrder)
                 {
                     var item = _context.items.Find(orderedItem.ItemId);
-
+                    //add total price to the order to make it easier to know what the client has to pay
+                    order.TotalPrice += item.Price;
+                    _context.SaveChanges();
+                    
                     orderedItemInfoList.Add(new //object
                     {
                         Id = item.Id,
-                        Name = item.Name
+                        Name = item.Name,
+                        Price = item.Price,
                     });
                 }
 
