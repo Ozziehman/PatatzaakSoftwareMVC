@@ -14,10 +14,13 @@
             @errorMessage
         </div>
     }
-    <label>YOU HAVE TO LOGIN TO AN ACCOUNT TO USE THE ORDER FEATURE, MAKE ACCOUNT ON User_CRUD page</label>
+    <div style="text-align: center; margin-top: 50px">
+        <label style="color: red;">You have to log into an account to use the order feature, make an account User_CRUD page. This woud be replaced with a register page</label>
+    </div>
+    
     <div class="container-sm homemessage">
         <form asp-action="Login" method="post">
-
+ 
             <div class="form-group">
                 <label asp-for="Email"></label>
                 <input asp-for="Email" class="form-control" />
@@ -30,7 +33,7 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button style="margin-top:5px"type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
 </body>
