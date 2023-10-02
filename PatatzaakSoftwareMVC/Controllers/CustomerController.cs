@@ -96,7 +96,7 @@ namespace PatatzaakSoftwareMVC.Controllers
 
                 return Json(response);
 
-                //Need to go to a confirmation page after this, that confirms your order is placed
+           
             }
             else
             {
