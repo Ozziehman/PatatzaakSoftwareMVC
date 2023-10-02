@@ -26,8 +26,8 @@
                         @foreach (var item in ViewBag.Items)
                         {
                             <div class="col-md-3 text-center itemCol p-4" style="display: inline-block;">
-                                <img id="itemImage" src="@item.ImagePath" class="mw-100 h-auto">                   
-                                <div class="btn" onclick="addToReceipt('@item.Name', '@item.Price', '@item.Id', '@sessionOrder.Id');">@item.Name - $@item.Price</div>
+                                <img id="itemImage" src="@item.ImagePath" class="mw-100 h-auto">
+                                <div class="btn" onclick="addToReceipt('@item.Name', '@item.Price', '@item.Discount', '@item.Id', '@sessionOrder.Id');">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</div>
                             </div>
                         }
                     }

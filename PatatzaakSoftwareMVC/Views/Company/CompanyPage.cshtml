@@ -32,7 +32,7 @@
 
                                     @foreach (var item in Model.GetItemsForOrder(@order.Id))
                                     {
-                                        <p style="color: black">@item.Name - &#8364 @item.Price</p>
+                                        <p style="color: black">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
                                     }
                                     <p style="color: black; font-weight: bold;">Total Price: &#8364 @order.TotalPrice</p>
                                 </div>
@@ -60,7 +60,7 @@
                                   
                                     @foreach (var item in Model.GetItemsForOrder(@order.Id))
                                     {
-                                        <p style="color: black">@item.Name - &#8364 @item.Price</p>
+                                        <p style="color: black">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
                                     }
                                     <p style="color: black; font-weight: bold;">Total Price: &#8364 @order.TotalPrice</p>
                                 </div>

@@ -61,7 +61,7 @@ namespace PatatzaakSoftwareMVC.Controllers
         {
             var order = _context.orders.Find(orderId);
             order.Status = "Placed";
-
+            float totalPrice= 0;
             List<OrderedItem> orderedItemsInOrder = _context.orderedItems.Where(o => o.OrderId == orderId).ToList();
            
             int result = _context.SaveChanges();
@@ -74,8 +74,7 @@ namespace PatatzaakSoftwareMVC.Controllers
                 {
                     var item = _context.items.Find(orderedItem.ItemId);
                     //add total price to the order to make it easier to know what the client has to pay
-                    order.TotalPrice += item.Price;
-                    _context.SaveChanges();
+                    totalPrice += (float)Math.Round(item.Price - (item.Price * (item.Discount / 100)), 2);
                     
                     orderedItemInfoList.Add(new //object
                     {
@@ -84,6 +83,9 @@ namespace PatatzaakSoftwareMVC.Controllers
                         Price = item.Price,
                     });
                 }
+                order.TotalPrice = (float)Math.Round((totalPrice), 2);
+                _context.SaveChanges();
+
 
                 var response = new
                 {
