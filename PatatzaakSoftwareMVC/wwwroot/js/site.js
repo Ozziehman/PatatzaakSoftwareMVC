@@ -83,7 +83,6 @@ function addToReceipt(itemName, itemPrice, itemId, orderId) {
 
 
 
-    //add item to list
     //display list in receipt
 
     console.log(itemName + " added to receipt");
@@ -93,7 +92,7 @@ function addToReceipt(itemName, itemPrice, itemId, orderId) {
 }
 
 function sendItemToList(itemId, orderId) {
-    // Make an AJAX request to a server-side endpoint to add the itemId to the C# list.
+    // Make an Ajax request to a server-side endpoint to add the itemId to the C# list.
     $.ajax({
         type: "POST",
         url: '/Customer/FillOrderWith',
@@ -130,9 +129,8 @@ function handleSuccessResponse(response) {
     if (response.success) {
         console.log(response.message);
 
-        // Check if the server indicated a page refresh
         if (response.refreshPage) {
-            // Refresh the page
+            // Refresh page if refreshpage = rue is returned
             location.reload(true);
         }
     } else {
