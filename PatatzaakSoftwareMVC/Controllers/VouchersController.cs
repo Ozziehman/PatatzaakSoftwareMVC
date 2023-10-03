@@ -48,7 +48,7 @@ namespace PatatzaakSoftwareMVC.Controllers
         // GET: Vouchers/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.users, "Id", "Email");
+            ViewData["UserId"] = new SelectList(_context.users, "Id", "UserDisplay");
             return View();
         }
 
@@ -92,29 +92,12 @@ namespace PatatzaakSoftwareMVC.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(voucher);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!VoucherExists(voucher.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["UserId"] = new SelectList(_context.users, "Id", "Email", voucher.UserId);
-            return View(voucher);
+            _context.Update(voucher);
+            await _context.SaveChangesAsync();
+            
+           
+            return RedirectToAction(nameof(Index));
+            
         }
 
         // GET: Vouchers/Delete/5

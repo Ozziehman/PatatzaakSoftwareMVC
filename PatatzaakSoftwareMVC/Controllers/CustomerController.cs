@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PatatzaakSoftwareMVC.Data;
 using PatatzaakSoftwareMVC.Models;
 using PatatzaakSoftwareMVC.Models.ViewModels;
@@ -13,7 +14,6 @@ namespace PatatzaakSoftwareMVC.Controllers
         private readonly MainDb _context;
         private readonly ILogger<CustomerController> _logger;
         public int sessionOrderId;
-        
 
         // Constructor that combines both parameters
         public CustomerController(MainDb context, ILogger<CustomerController> logger)
@@ -21,13 +21,19 @@ namespace PatatzaakSoftwareMVC.Controllers
             _context = context;
             _logger = logger;
         }
+       
+        
         public IActionResult Index()
         {
+            var userJson = HttpContext.Session.GetString("User");
+            var sessionUser = JsonConvert.DeserializeObject<User>(userJson);
             var items = _context.items.ToList();
             ViewBag.Items = items;
 
-            return View("~/Views/Customer/CustomerPage.cshtml", new CustomerPageViewModel(_context));
+            var userVouchers = _context.vouchers.Where(v => v.UserId == sessionUser.Id).ToList();
+            ViewData["UserVoucherList"] = new SelectList(userVouchers, "Id", "VoucherDisplay");
 
+            return View("~/Views/Customer/CustomerPage.cshtml", new CustomerPageViewModel(_context));
         }
         
 
@@ -58,7 +64,7 @@ namespace PatatzaakSoftwareMVC.Controllers
             return Json(new { success = true, message = "item added" });
         }
 
-        public IActionResult PlaceOrder(int orderId)
+        public IActionResult PlaceOrder(int orderId, string voucherId)
         {
             var order = _context.orders.Find(orderId);
             order.Status = "Placed";
@@ -84,6 +90,19 @@ namespace PatatzaakSoftwareMVC.Controllers
                         Price = item.Price,
                     });
                 }
+
+                if (voucherId != null)
+                {
+                    Voucher voucher = _context.vouchers.Find(int.Parse(voucherId));
+                    if (voucher != null)
+                    {
+                        if (voucher.ExpiresBy > DateTime.Now)
+                        {
+                            totalPrice = (float)Math.Round(totalPrice - (totalPrice * (voucher.VoucherDiscount / 100)), 2);
+                        }
+                    }
+                }
+
                 order.TotalPrice = (float)Math.Round((totalPrice), 2);
                 _context.SaveChanges();
 

@@ -22,6 +22,7 @@ namespace PatatzaakSoftwareMVC.Models
         public ICollection<Order>? Orders { get; set; } 
         public ICollection<Voucher>? Vouchers { get; set; }
 
+        public string UserDisplay => $"Email: '{Email}' - UserID: '{Id}'";
         public void CreateUser()
         {
 

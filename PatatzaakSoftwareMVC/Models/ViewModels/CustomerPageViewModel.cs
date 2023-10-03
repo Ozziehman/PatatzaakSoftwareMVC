@@ -1,6 +1,7 @@
 ﻿
 using Humanizer.Localisation.TimeToClockNotation;
 using PatatzaakSoftwareMVC.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace PatatzaakSoftwareMVC.Models.ViewModels
 {
@@ -8,6 +9,9 @@ namespace PatatzaakSoftwareMVC.Models.ViewModels
     {
 
         private readonly MainDb _context;
+
+        [Display(Name = "Selected Voucher")]
+        public int? SelectedVoucherId { get; set; }
 
         public CustomerPageViewModel(MainDb context)
         {
@@ -18,6 +22,8 @@ namespace PatatzaakSoftwareMVC.Models.ViewModels
             Item item = new Item();
             return item;
         }
+
+        
 
 
         public Order CreateOrderObject(int currentUserId)

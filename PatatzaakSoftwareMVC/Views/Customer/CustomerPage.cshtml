@@ -12,6 +12,8 @@
         sessionUserId = user.Id;
     }
     var sessionOrder = Model.CreateOrderObject(sessionUserId);
+    var userVoucherList = ViewData["UserVoucherList"] as SelectList;
+
      /*  this order object will have its Id passed to JS returning in the Controller with AJAX, then the controller will add the items to that orderId */
 }
 <html>                                                                                                      
@@ -46,10 +48,13 @@
                 </div>
                 <hr />
                 <div >
-                    <span>Totaal:         </span>
+                    <span>Totaal:</span>
                     <span id="totalPrice"></span>
                 </div>
                 <hr />
+                <select asp-for="SelectedVoucherId" asp-items="userVoucherList" class="form-control" id="voucherDropdown">
+                    <option value="">Select a voucher</option>
+                </select>
                 <div class="col">
                     <div class="btn" Id="placeOrderButton" onclick="PlaceOrderButtonClicked('@sessionOrder.Id');">Place Order</div>
                 </div>

@@ -20,11 +20,15 @@ namespace PatatzaakSoftwareMVC.Models
         [MaxLength(255)]
         public string? VoucherCode { get; set; }
 
+        public string VoucherDisplay => $"{VoucherCode} - {VoucherDiscount}%";
+
         [Required]
         public DateTime ExpiresBy { get; set; }
 
         [Required]
         public User? User { get; set; }
         public int? UserId { get; set; }
+
+        
     }
 }
