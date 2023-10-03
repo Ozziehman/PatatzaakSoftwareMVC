@@ -38,59 +38,61 @@ function CreateMenuItem(itemName, itemPrice = "9.000.000", imagePath = "../Resou
 
 var dummySpanPresent = true;
 
-//get next order number from database and load it into orderNumber var, display that var in the p1 on the CustomerPage where ordernumber should be displayed
+var itemList = [];  
+
+
+
 function addToReceipt(itemName, itemPrice, itemDiscount, itemId, orderId) {
-    //create list of all added items
-    var itemList = []
-    if (itemList.includes(itemName)) {
-        //add 1 to item quantity
-    } else {
-        itemList.push(itemName)
-    }
+    // Create list of all added items
+    
+    itemList.push(itemName);
+    
 
     if (dummySpanPresent) {
         var element = document.getElementById("dummySpan");
         element.parentNode.removeChild(element);
         dummySpanPresent = false;
-
     }
 
+    var totalPrice = document.getElementById("totalPrice");
+    var totalPriceToDisplay = 0;
+
+    // When an item is added, render it into the receipt: DO NOT LET THIS USE ANY IMPORTANT LOGIC TO THE DB, THIS IS PURELY FOR DISPLAY
+    const receipt = document.getElementById("receipt");
+
+    receipt.innerHTML = '';
+
     for (let i = 0; i < itemList.length; i++) {
-
-        const receipt = document.getElementById("receipt")
-
         const newRow = document.createElement("div");
         newRow.classList.add("row");
 
         const productCol = document.createElement("div");
-        productCol.classList.add("col-md-8")
+        productCol.classList.add("col-md-8");
         const textDiv = document.createElement("div");
         textDiv.textContent = itemList[i];
         productCol.appendChild(textDiv);
 
         const priceCol = document.createElement("div");
-        priceCol.classList.add("col-md-4")
+        priceCol.classList.add("col-md-4");
         const priceDiv = document.createElement("div");
-        priceDiv.textContent = "\u20AC" + (itemPrice - (itemPrice * (itemDiscount / 100))); //let ths load from item, not from itemList in the dummy list
+
+        const itemPriceAfterDiscount = itemPrice - (itemPrice * (itemDiscount / 100));
+        priceDiv.textContent = "\u20AC" + itemPriceAfterDiscount.toFixed(2);
+        totalPriceToDisplay += itemPriceAfterDiscount;
+
         priceCol.appendChild(priceDiv);
-
-
 
         newRow.appendChild(productCol);
         newRow.appendChild(priceCol);
         receipt.appendChild(newRow);
     }
 
+    totalPrice.innerHTML = "\u20AC" + totalPriceToDisplay.toFixed(2);
 
-
-    //display list in receipt
-
-    console.log(itemName + " added to receipt");
-    sendItemToList(itemId, orderId)
-
-    
+    // Display list in receipt
+    console.log(itemList.join(", ") + " added to receipt");
+    sendItemToList(itemId, orderId);
 }
-
 function sendItemToList(itemId, orderId) {
     // Make an Ajax request to a server-side endpoint to add the itemId to the C# list.
     $.ajax({
