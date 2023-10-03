@@ -12,21 +12,19 @@ namespace PatatzaakSoftwareMVC.Models
         public int Id { get; set; }
 
         [Required]
-        public float Price { get; set; }
+        public int Price { get; set; } //To be bought with points
+
+        public float VoucherDiscount { get; set; }
 
         [Required]
         [MaxLength(255)]
-        public string? Code { get; set; }
+        public string? VoucherCode { get; set; }
 
         [Required]
         public DateTime ExpiresBy { get; set; }
 
         [Required]
-        public User? user { get; set; }
-
-        public void RedeemVoucher()
-        {
-
-        }
+        public User? User { get; set; }
+        public int? UserId { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using PatatzaakSoftwareMVC.Data;
 namespace PatatzaakSoftwareMVC.Migrations
 {
     [DbContext(typeof(MainDb))]
-    [Migration("20231001145221_InitialDbBuild")]
-    partial class InitialDbBuild
+    [Migration("20231003111244_initialBuild")]
+    partial class initialBuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,23 +149,27 @@ namespace PatatzaakSoftwareMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
+                    b.Property<DateTime>("ExpiresBy")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("VoucherCode")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("ExpiresBy")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("Price")
+                    b.Property<float>("VoucherDiscount")
                         .HasColumnType("real");
-
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("vouchers");
                 });
@@ -202,13 +206,13 @@ namespace PatatzaakSoftwareMVC.Migrations
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Voucher", b =>
                 {
-                    b.HasOne("PatatzaakSoftwareMVC.Models.User", "user")
+                    b.HasOne("PatatzaakSoftwareMVC.Models.User", "User")
                         .WithMany("Vouchers")
-                        .HasForeignKey("userId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PatatzaakSoftwareMVC.Models.Order", b =>
