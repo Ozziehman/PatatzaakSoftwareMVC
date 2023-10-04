@@ -17,6 +17,11 @@ namespace PatatzaakSoftwareMVC.Models.ViewModels
         {
             _context = context;
         }
+
+        /// <summary>
+        /// Currently not used but could be usefull
+        /// </summary>
+        /// <returns></returns>
         public Item CreateItemObject()
         {
             Item item = new Item();
@@ -25,7 +30,11 @@ namespace PatatzaakSoftwareMVC.Models.ViewModels
 
         
 
-
+        /// <summary>
+        /// Creates order to fill when entering the order page
+        /// </summary>
+        /// <param name="currentUserId"></param>
+        /// <returns></returns>
         public Order CreateOrderObject(int currentUserId)
         {
             Order order = new Order();
