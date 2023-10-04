@@ -19,6 +19,9 @@ namespace PatatzaakSoftwareMVC.Models
         [Required]
         public DateTime TimePlaced { get; set; } = DateTime.Now;
 
+        /// <summary>
+        /// Finished is not neccesary but still left in for later use maybe
+        /// </summary>
         public bool Finished { get; set; }
         public string? Status { get; set; } = "BeingChosen"; //1: BeingChosen
                                                              //2: Placed

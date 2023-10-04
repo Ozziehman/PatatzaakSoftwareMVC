@@ -19,7 +19,7 @@ namespace PatatzaakSoftwareMVC.Controllers
         }
 
         /// <summary>
-        /// Make sviewbag for items to be displayed
+        /// Makes viewbag for items to be displayed
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
