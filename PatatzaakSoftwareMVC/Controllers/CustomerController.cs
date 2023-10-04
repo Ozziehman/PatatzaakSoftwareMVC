@@ -37,7 +37,15 @@ namespace PatatzaakSoftwareMVC.Controllers
         }
         
 
+        /// <summary>
+        /// Is activated through AJAX from the site.js script to fill the order with an item, 
+        /// it creates an orderedItem that is linked to an item and and order. 
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         [HttpPost]
+        
         public IActionResult FillOrderWith(int itemId, int orderId)
         {
             sessionOrderId = orderId;
@@ -64,6 +72,13 @@ namespace PatatzaakSoftwareMVC.Controllers
             return Json(new { success = true, message = "item added" });
         }
 
+
+        /// <summary>
+        /// is activated through AJAX from the site.js script to place the order and make it visible to the company 
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="voucherId"></param>
+        /// <returns></returns>
         public IActionResult PlaceOrder(int orderId, string voucherId)
         {
             var order = _context.orders.Find(orderId);

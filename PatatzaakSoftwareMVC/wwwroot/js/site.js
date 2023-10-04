@@ -82,6 +82,21 @@ function PlaceOrderButtonClicked(orderId) {
     });
 }
 
+function RevertToPlaced(orderId) {
+    $.ajax({
+        type: "POST",
+        url: '/OrderHistory/RevertToPlaced',
+        data: {
+            orderId: orderId,
+        },
+        success: function (response) {
+            console.log(response);
+            handleSuccessResponse(response);
+        }
+    });
+}
+
+
 
 function handleSuccessResponse(response) {
     if (response.success) {

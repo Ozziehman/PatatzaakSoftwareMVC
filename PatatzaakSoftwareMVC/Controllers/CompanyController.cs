@@ -18,6 +18,12 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/Company/CompanyPage.cshtml", new CompanyPageViewModel(_context));
         }
 
+
+        /// <summary>
+        /// Changes clicked order to a "Ready" status, is triggered with AJAX from site.js
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         public IActionResult ReadyOrder(int orderId)
         {
             var order = _context.orders.Find(orderId);
@@ -32,6 +38,12 @@ namespace PatatzaakSoftwareMVC.Controllers
             return Json(new { success = true, message = "Ready order processed successfully", refreshPage = true });
         }
 
+
+        /// <summary>
+        /// Changes clicked order to a "Completed" status, is triggered with AJAX from site.js
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         public IActionResult CompleteOrder(int orderId)
         {
             var order = _context.orders.Find(orderId);

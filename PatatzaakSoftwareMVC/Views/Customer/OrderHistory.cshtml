@@ -1,0 +1,22 @@
+﻿@model PatatzaakSoftwareMVC.Models.ViewModels.OrderHistoryViewModel
+@{
+	List<Order> orderList = ViewBag.Orders;
+}
+
+@foreach (Order order in orderList)
+{
+    <div class="col-md-3 text-center itemCol p-2">
+        <div class="dropdown" onmouseover="showDropdown('@order.Id')" onmouseout="hideDropdown('@order.Id')">
+            <button class="btn order-btn" onclick="RevertToPlaced('@order.Id')">@order.Id</button>
+            <div id="dropdownContent-@order.Id" class="dropdown-content">
+                <p style="color: black; font-weight: bold;">Order ID: @order.Id</p>
+
+                @foreach (var item in Model.GetItemsForOrder(@order.Id))
+                {
+                    <p style="color: black">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
+                }
+                <p style="color: black; font-weight: bold;">Total Price: &#8364 @order.TotalPrice</p>
+            </div>
+        </div>
+    </div>
+}
