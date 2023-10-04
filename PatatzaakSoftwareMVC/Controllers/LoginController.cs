@@ -57,6 +57,16 @@ namespace PatatzaakSoftwareMVC.Controllers
             }       
         }
 
+        /// <summary>
+        /// Clears the sessionstorage
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Login");
+        }
+
 
         /// <summary>
         /// Validates user credentials

@@ -11,12 +11,16 @@
     <div class="container-sm homemessage">
         @if (user != null)
         {
-            <span>Welcome @user.Name</span>
+            <div>
+                <span>Welcome @user.Name</span>
+            </div>
+            <img src="https://www.troublefreepool.com/media/hello-gif.3474/full" alt="no image" width="250" />
         }
         else
         {
             <span>Log in please: <a href="/Login">Login</a></span>
 
         }
+
     </div>
 </body>

@@ -48,6 +48,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index"><label class="navcomponent">OrderDetails</label></a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Index"><label class="navcomponent">Item_CRUD</label></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vouchers" asp-action="Index"><label class="navcomponent">Voucher_CRUD</label></a>
+                            </li>
                         }
 
                         @if(Context.Session.GetString("User") != null)
@@ -57,18 +63,14 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="OrderHistory" asp-action="Index"><label class="navcomponent">Order History</label></a>
-                            </li>
+                            </li>        
                         }
                         
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Index"><label class="navcomponent">Item_CRUD</label></a>
-                        </li>
+                        @*temporarily available for everyone as a testing environment*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index"><label class="navcomponent">User_CRUD</label></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vouchers" asp-action="Index"><label class="navcomponent">Voucher_CRUD</label></a>
-                        </li>
+                        
 
                     </ul>
                     <ul class="navbar-nav">
@@ -76,7 +78,7 @@
                             <div class="nav-link text-white">
                                 @if (user != null)
                                 {
-                                    <span>@user.Name</span>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout"><label class="navcomponent" style="color:red"><label style="color:white">@user.Name</label>  LOG OUT</label></a>
                                 }
                                 else
                                 {
