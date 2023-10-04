@@ -68,7 +68,7 @@ namespace PatatzaakSoftwareMVC.Controllers
             {
                 _logger.LogInformation($"Failed!");
             }
-         
+        
             return Json(new { success = true, message = "item added" });
         }
 
@@ -114,13 +114,18 @@ namespace PatatzaakSoftwareMVC.Controllers
                         if (voucher.ExpiresBy > DateTime.Now)
                         {
                             totalPrice = (float)Math.Round(totalPrice - (totalPrice * (voucher.VoucherDiscount / 100)), 2);
+                            _context.vouchers.Remove(voucher);         
                         }
                     }
                 }
 
+                
                 order.TotalPrice = (float)Math.Round((totalPrice), 2);
-                _context.SaveChanges();
 
+                //give the user points for each full euro they spent
+                _context.users.Find(order.UserId).Points += (int)Math.Round(totalPrice);
+
+                _context.SaveChanges();
 
                 var response = new
                 {

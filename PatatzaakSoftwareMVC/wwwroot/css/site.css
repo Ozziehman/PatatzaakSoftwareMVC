@@ -182,3 +182,56 @@ body {
 .border-right {
     border-right: 1px solid ;
 }
+
+.voucher-container {
+    text-align: center;
+}
+
+.voucher-button {
+    font-size: 24px;
+    padding: 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#btn10Percent {
+    background-color: #4CAF50;
+    width: 100%;
+    height: 110px;
+    color: white;
+}
+
+#btn20Percent {
+    background-color: #008CBA;
+    width: 100%;
+    height: 120px;
+    color: white;
+}
+
+#btn30Percent {
+    background-color: #FF7F50;
+    width: 100%;
+    height: 130px;
+    color: white;
+}
+
+#btn40Percent {
+    background-color: #FFD700;
+    width: 100%;
+    height: 140px;
+    color: white;
+}
+
+#btn50Percent {
+    background-color: #FF0000;
+    width: 100%;
+    height: 150px;
+    color: white;
+}
+
+.voucher-button:hover {
+    background-color: #45a049;
+}

@@ -63,7 +63,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="OrderHistory" asp-action="Index"><label class="navcomponent">Order History</label></a>
-                            </li>        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="VoucherStore" asp-action="Index"><label class="navcomponent">Voucher Store</label></a>
+                            </li>
                         }
                         
                         @*temporarily available for everyone as a testing environment*@
@@ -78,7 +81,7 @@
                             <div class="nav-link text-white">
                                 @if (user != null)
                                 {
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout"><label class="navcomponent" style="color:red"><label style="color:white">@user.Name</label>  LOG OUT</label></a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout"><label class="navcomponent" style="color:red"><label style="color:white">@user.Name - Points: @user.Points</label>  LOG OUT</label></a>
                                 }
                                 else
                                 {

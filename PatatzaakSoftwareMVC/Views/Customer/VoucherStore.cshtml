@@ -1,0 +1,39 @@
+﻿@using Newtonsoft.Json;
+
+@{
+    ViewData["Title"] = "VoucherStore";
+    int sessionUserId = 0;
+    int sessionUserPoints = 0;
+    var sessionUserJson = Context.Session.GetString("User");
+
+    if (sessionUserJson != null)
+    {
+        var user = JsonConvert.DeserializeObject<User>(sessionUserJson);
+        sessionUserId = user.Id;
+        sessionUserPoints = user.Points;
+    }
+}
+<div id="voucherContainer"class="voucher-container">
+    <button id="btn10Percent" class="voucher-button" onclick="buyVoucher(10, 'voucher10','@sessionUserId')">10% Voucher - 10 points</button>
+    <button id="btn20Percent" class="voucher-button" onclick="buyVoucher(20, 'voucher20','@sessionUserId')">20% Voucher - 20 points</button>
+    <button id="btn30Percent" class="voucher-button" onclick="buyVoucher(30, 'voucher30','@sessionUserId')">30% Voucher - 30 points</button>
+    <button id="btn40Percent" class="voucher-button" onclick="buyVoucher(40, 'voucher40','@sessionUserId')">40% Voucher - 40 points</button>
+    <button id="btn50Percent" class="voucher-button" onclick="buyVoucher(50, 'voucher50','@sessionUserId')">50% Voucher - 50 points</button>
+</div>
+
+<div id="buyMessage"style="text-align: center; display:none;">
+    <img src="~/Resources/Images/Checkmark.png" style="max-width: 100px; max-height: 100px;" alt="Checkmark" />
+    <br />
+    <div>
+        <h3 class="text-center" style="color: lightgreen">Voucher Bought, Valid for the next 7 days</h3>
+        <hr />
+    </div>
+</div>
+<div id="failMessage" style="text-align: center; display:none;">
+    <img src="~/Resources/Images/redXMark.png" style="max-width: 100px; max-height: 100px;" alt="Checkmark" />
+    <br />
+    <div>
+        <h3 class="text-center" style="color: red">Purchase failed, you only have <label id="currentPoints"></label> Points</h3>
+        <hr />
+    </div>
+</div>

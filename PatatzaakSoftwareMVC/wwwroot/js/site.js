@@ -135,6 +135,36 @@ function CompleteOrder(orderId) {
         }
     });
 }
+function buyVoucher(voucherPercentage, voucherCode, userId) {
+    $.ajax({
+        type: "POST",
+        url: '/VoucherStore/buyVoucher',
+        data: {
+            voucherPercentage: voucherPercentage,
+            voucherCode: voucherCode,
+            userId : userId
+        },
+        success: function (response) {
+            console.log(response);
+            if (response.success) {
+                var voucherContainer = document.getElementById("voucherContainer");
+                voucherContainer.style.display = "none";
+                var buyMessage = document.getElementById("buyMessage");
+                buyMessage.style.display = "block";
+            }
+            else {
+                var voucherContainer = document.getElementById("voucherContainer");
+                var pointsLabel = document.getElementById("currentPoints");
+                pointsLabel.innerHTML = response.currentPoints;
+                voucherContainer.style.display = "none";
+                var buyMessage = document.getElementById("failMessage");
+                buyMessage.style.display = "block";
+            }
+            
+  
+        }
+    });
+}
 
 
 function showDropdown(orderId) {
