@@ -95,5 +95,6 @@ namespace PatatzaakSoftwareMVC.Controllers
             var sessionUser = _context.users.Where(u => u.Email == email).FirstOrDefault();
             return sessionUser;
         }
+
     }
 }
