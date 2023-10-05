@@ -53,6 +53,7 @@ namespace PatatzaakSoftwareMVC.Controllers
             }
 
             order.Status = "Completed";
+            order.Finished = true;
             _context.SaveChanges();
 
         

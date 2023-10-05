@@ -38,6 +38,7 @@ namespace PatatzaakSoftwareMVC.Controllers
         {
             var orderToReorder = _context.orders.Find(orderId);
             orderToReorder.Status = "Placed";
+            orderToReorder.Finished = false;
             orderToReorder.TimePlaced = DateTime.Now;
             if (_context.SaveChanges() > 0)
             {
