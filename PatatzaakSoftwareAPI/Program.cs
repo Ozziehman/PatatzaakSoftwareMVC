@@ -27,6 +27,7 @@ namespace PatatzaakSoftwareAPI
             builder.Services.AddScoped<OrderRepository>();
             builder.Services.AddScoped<UserRepository>();
             builder.Services.AddScoped<VoucherRepository>();
+            builder.Services.AddScoped<OrderedItemRepository>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
