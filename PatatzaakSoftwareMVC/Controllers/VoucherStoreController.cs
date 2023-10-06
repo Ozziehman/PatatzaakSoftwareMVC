@@ -36,7 +36,7 @@ namespace PatatzaakSoftwareMVC.Controllers
             user.Points -= voucher.Price;
             _context.vouchers.Add(voucher);
             _context.SaveChanges();
-            return Json(new { success = true, message = "Voucher bought"});
+            return Json(new { success = true, message = "Voucher bought", currentPoints = user.Points });
         }
     }
 }

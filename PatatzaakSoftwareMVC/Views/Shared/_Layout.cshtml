@@ -80,7 +80,7 @@
                             <div class="nav-link text-white">
                                 @if (user != null)
                                 {
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout"><label class="navcomponent" style="color:red"><label style="color:white">@user.Name - Points: @user.Points</label>  LOG OUT</label></a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout"><label class="navcomponent" style="color:red"><label style="color:white">@user.Name - <label id="pointsDisplay">Points: @user.Points</label></label>  LOG OUT</label></a>
                                 }
                                 else
                                 {

@@ -11,7 +11,7 @@ namespace PatatzaakSoftwareAPI
         {
             var builder = WebApplication.CreateBuilder(args);
             var configuration = builder.Configuration;
-            var connectionString = configuration.GetConnectionString("MainDbConnectionPC");
+            var connectionString = configuration.GetConnectionString("MainDbConnectionLaptop");
             // Add services to the container.
 
             builder.Services.AddControllers();

@@ -123,7 +123,10 @@ namespace PatatzaakSoftwareMVC.Controllers
                 order.TotalPrice = (float)Math.Round((totalPrice), 2);
 
                 //give the user points for each full euro they spent
-                _context.users.Find(order.UserId).Points += (int)Math.Round(totalPrice);
+                var user = _context.users.Find(order.UserId);
+
+                user.Points += (int)Math.Round(totalPrice);
+                
 
                 _context.SaveChanges();
 
@@ -132,6 +135,7 @@ namespace PatatzaakSoftwareMVC.Controllers
                     success = true,
                     message = $"Order placed and order status of order with Id {orderId} changed to 'Placed'",
                     orderedItems = orderedItemInfoList,
+                    currentPoints = user.Points
                 };
 
                 return Json(response);

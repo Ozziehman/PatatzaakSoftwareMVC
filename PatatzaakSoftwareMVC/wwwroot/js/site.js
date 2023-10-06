@@ -78,6 +78,10 @@ function PlaceOrderButtonClicked(orderId) {
 
             var menu = document.getElementById("menuColumn");
             menu.style.display = "none";
+
+            var pointsDisplay = document.getElementById("pointsDisplay");
+            pointsDisplay.innerHTML = "Points: " + response.currentPoints;
+
         }
     });
 }
@@ -151,6 +155,9 @@ function buyVoucher(voucherPercentage, voucherCode, userId) {
                 voucherContainer.style.display = "none";
                 var buyMessage = document.getElementById("buyMessage");
                 buyMessage.style.display = "block";
+
+                var pointsDisplay = document.getElementById("pointsDisplay");
+                pointsDisplay.innerHTML = "Points: " + response.currentPoints;
             }
             else {
                 var voucherContainer = document.getElementById("voucherContainer");

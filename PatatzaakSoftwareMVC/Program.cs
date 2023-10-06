@@ -24,7 +24,7 @@ namespace PatatzaakSoftwareMVC.Data
             builder.Services.AddDbContext<MainDb>(
                 DbContextOptions =>
                 DbContextOptions.UseSqlServer(
-                    builder.Configuration.GetConnectionString("MainDbConnectionPC")));
+                    builder.Configuration.GetConnectionString("MainDbConnectionLaptop")));
 
 
             var app = builder.Build();
