@@ -21,7 +21,8 @@ namespace PatatzaakSoftwareMVC.Controllers
 
 
         /// <summary>
-        /// In production there should be at least 1 admin account already made to be able to 
+        /// In production there should be at least 1 admin account already made to be able to. In development (because there is no authentication yet) this can be achieved 
+        /// by going to the database and setting the IsAdmin field to true for a user. OR by adding "/users" to the url and adding a user with admin privileges.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
