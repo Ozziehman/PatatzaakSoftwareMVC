@@ -46,6 +46,7 @@ function addToReceipt(itemName, itemPrice, itemDiscount, itemId, orderId) {
     sendItemToList(itemId, orderId);
 }
 
+//Send item to the list of items in the order AJAX
 function sendItemToList(itemId, orderId) {
     // Make an Ajax request to a server-side endpoint to add the itemId to the C# list.
     $.ajax({
@@ -58,7 +59,7 @@ function sendItemToList(itemId, orderId) {
     });
 }
 
-
+//Place the order and updat it in the databse and update the UI accordingly AJAX
 function PlaceOrderButtonClicked(orderId) {
     $.ajax({
         type: "POST",
@@ -86,6 +87,7 @@ function PlaceOrderButtonClicked(orderId) {
     });
 }
 
+//Revert the status of an order to "Placed" AJAX
 function RevertToPlaced(orderId) {
     $.ajax({
         type: "POST",
@@ -101,7 +103,7 @@ function RevertToPlaced(orderId) {
 }
 
 
-
+//Handle success response from AJAX, it will refresh the page if refreshPage = true is returned
 function handleSuccessResponse(response) {
     if (response.success) {
         console.log(response.message);
@@ -116,6 +118,7 @@ function handleSuccessResponse(response) {
     }
 }
 
+//Ready the order for pickup AJAX
 function ReadyOrder(orderId) {
     $.ajax({
         type: "POST",
@@ -128,6 +131,7 @@ function ReadyOrder(orderId) {
     });
 }
 
+//Complete the order AJAX
 function CompleteOrder(orderId) {
     $.ajax({
         type: "POST",
@@ -139,6 +143,8 @@ function CompleteOrder(orderId) {
         }
     });
 }
+
+//Buy a voucher AJAX
 function buyVoucher(voucherPercentage, voucherCode, userId) {
     $.ajax({
         type: "POST",
@@ -174,6 +180,7 @@ function buyVoucher(voucherPercentage, voucherCode, userId) {
 }
 
 
+///Dropdown hide
 function showDropdown(orderId) {
     var dropdownContent = document.getElementById("dropdownContent-" + orderId);
     if (dropdownContent) {
@@ -181,6 +188,7 @@ function showDropdown(orderId) {
     }
 }
 
+//Dropdown hide
 function hideDropdown(orderId) {
     var dropdownContent = document.getElementById("dropdownContent-" + orderId);
     if (dropdownContent) {

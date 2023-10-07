@@ -235,3 +235,20 @@ body {
 .voucher-button:hover {
     background-color: #45a049;
 }
+
+#companyPageP {
+    color: black;
+    font-weight: bold;
+}
+
+#dropdownP {
+    color: black;
+}
+
+#succesMessageSpan {
+    color: lightgreen; font-weight: bold; font-size: 18px;
+}
+
+#checkMark {
+    max-width: 100px; max-height: 100px;
+}

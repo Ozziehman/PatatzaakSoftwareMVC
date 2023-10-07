@@ -17,6 +17,13 @@ namespace PatatzaakSoftwareMVC.Controllers
             return View("~/Views/Customer/VoucherStore.cshtml");
         }
 
+        /// <summary>
+        /// Buy a voucher with points, is triggered with AJAX from site.js
+        /// </summary>
+        /// <param name="voucherPercentage"></param>
+        /// <param name="voucherCode"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public IActionResult BuyVoucher(int voucherPercentage, string voucherCode, int userId)
         {
             var user = _context.users.Find(userId);

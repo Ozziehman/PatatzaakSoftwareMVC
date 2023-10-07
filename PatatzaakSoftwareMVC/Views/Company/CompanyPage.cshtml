@@ -27,14 +27,14 @@
                             <div class="dropdown" onmouseover="showDropdown('@order.Id')" onmouseout="hideDropdown('@order.Id')">
                                 <button class="btn order-btn" onclick="ReadyOrder('@order.Id')">@order.Id</button>
                                 <div id="dropdownContent-@order.Id" class="dropdown-content">
-                                    <p style="color: black; font-weight: bold;">Order ID: @order.Id</p>
-                                    <p style="color: black; font-weight: bold;">Customer Name: @Model.GetCustomerNameForOrder(order.Id)</p>
+                                    <p id="companyPageP">Order ID: @order.Id</p>
+                                    <p id="companyPageP">Customer Name: @Model.GetCustomerNameForOrder(order.Id)</p>
 
                                     @foreach (var item in Model.GetItemsForOrder(@order.Id))
                                     {
-                                        <p style="color: black">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
+                                        <p id="dropdownP">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
                                     }
-                                    <p style="color: black; font-weight: bold;">Total Price: &#8364 @order.TotalPrice</p>
+                                    <p id="companyPageP">Total Price: &#8364 @order.TotalPrice</p>
                                 </div>
                             </div>
                         </div>
@@ -55,14 +55,14 @@
                             <div class="dropdown" onmouseover="showDropdown('@order.Id')" onmouseout="hideDropdown('@order.Id')">
                                 <button class="btn order-btn" onclick="CompleteOrder('@order.Id')">@order.Id</button>
                                 <div id="dropdownContent-@order.Id" class="dropdown-content">
-                                    <p style="color: black; font-weight: bold;">Order ID: @order.Id</p>
-                                    <p style="color: black; font-weight: bold;">Customer Name: @Model.GetCustomerNameForOrder(order.Id)</p>
+                                    <p id="companyPageP">Order ID: @order.Id</p>
+                                    <p id="companyPageP">Customer Name: @Model.GetCustomerNameForOrder(order.Id)</p>
                                   
                                     @foreach (var item in Model.GetItemsForOrder(@order.Id))
                                     {
-                                        <p style="color: black">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
+                                        <p id="dropdownP">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
                                     }
-                                    <p style="color: black; font-weight: bold;">Total Price: &#8364 @order.TotalPrice</p>
+                                    <p id="companyPageP">Total Price: &#8364 @order.TotalPrice</p>
                                 </div>
                             </div>
                         </div>
