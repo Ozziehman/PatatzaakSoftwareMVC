@@ -20,11 +20,21 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             return await _context.vouchers.ToListAsync();
         }
 
+        /// <summary>
+        /// Get voucher by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Voucher> GetVoucherByIdAsync(int id)
         {
             return await _context.vouchers.FindAsync(id);
         }
 
+        /// <summary>
+        /// Add voucher to the database
+        /// </summary>
+        /// <param name="voucher"></param>
+        /// <returns></returns>
         public async Task<Voucher> AddVoucherAsync(Voucher voucher)
         {
             _context.vouchers.Add(voucher);
@@ -32,6 +42,11 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             return voucher;
         }
 
+        /// <summary>
+        /// Update voucher in the database
+        /// </summary>
+        /// <param name="voucher"></param>
+        /// <returns></returns>
         public async Task<Voucher> UpdateVoucherAsync(Voucher voucher)
         {
             _context.Entry(voucher).State = EntityState.Modified;
@@ -39,6 +54,11 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             return voucher;
         }
 
+        /// <summary>
+        /// Delete voucher by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> DeleteVoucherAsync(int id)
         {
             var voucher = await _context.vouchers.FindAsync(id);

@@ -46,7 +46,7 @@ namespace PatatzaakSoftwareMVC.Controllers
                 //store user into sessionstorage
                 HttpContext.Session.SetString("User", userJson);
                 
-                _logger.LogInformation($"Session user name: {HttpContext.Session.GetString("User")}");
+                _logger.LogInformation($"Session user: {HttpContext.Session.GetString("User")}");
                 return RedirectToAction("Index","Home");
             }
             else

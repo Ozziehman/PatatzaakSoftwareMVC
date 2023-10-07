@@ -17,16 +17,27 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             _context = context;
         }
 
+
         public async Task<IEnumerable<Order>> GetOrdersAsync()
         {
             return await _context.orders.ToListAsync();
         }
 
+        /// <summary>
+        /// Get order by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Order> GetOrderByIdAsync(int id)
         {
             return await _context.orders.FindAsync(id);
         }
 
+        /// <summary>
+        /// add an order to the database
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public async Task<Order> AddOrderAsync(Order order)
         {
             _context.orders.Add(order);
@@ -34,6 +45,11 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             return order;
         }
 
+        /// <summary>
+        /// update an order in the database
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public async Task<Order> UpdateOrderAsync(Order order)
         {
             _context.Entry(order).State = EntityState.Modified;
@@ -41,6 +57,11 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             return order;
         }
 
+        /// <summary>
+        /// Delete an order by id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> DeleteOrderAsync(int id)
         {
             var order = await _context.orders.FindAsync(id);

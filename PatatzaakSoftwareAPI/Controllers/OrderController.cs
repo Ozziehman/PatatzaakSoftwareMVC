@@ -22,6 +22,11 @@ public class OrderController : ControllerBase
         return Ok(orders);
     }
 
+    /// <summary>
+    /// Get a single order by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<ActionResult<Order>> GetOrder(int id)
     {

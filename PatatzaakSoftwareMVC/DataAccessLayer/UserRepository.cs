@@ -20,11 +20,21 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             return await _context.users.ToListAsync();
         }
 
+        /// <summary>
+        /// Get user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<User> GetUserByIdAsync(int id)
         {
             return await _context.users.FindAsync(id);
         }
 
+        /// <summary>
+        /// Add a user to the database 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<User> AddUserAsync(User user)
         {
             _context.users.Add(user);
@@ -32,6 +42,11 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             return user;
         }
 
+        /// <summary>
+        /// Update a user in the database
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<User> UpdateUserAsync(User user)
         {
             _context.Entry(user).State = EntityState.Modified;
@@ -39,6 +54,11 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
             return user;
         }
 
+        /// <summary>
+        /// Delete a user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> DeleteUserAsync(int id)
         {
             var user = await _context.users.FindAsync(id);

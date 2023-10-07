@@ -22,6 +22,11 @@ public class OrderedItemController : ControllerBase
         return Ok(orderedItems);
     }
 
+    /// <summary>
+    /// Get a single ordered item by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<ActionResult<OrderedItem>> GetOrderedItem(int id)
     {

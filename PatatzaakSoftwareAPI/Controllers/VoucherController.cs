@@ -22,6 +22,11 @@ public class VoucherController : ControllerBase
         return Ok(vouchers);
     }
 
+    /// <summary>
+    /// Get a single voucher by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<ActionResult<Voucher>> GetVoucher(int id)
     {

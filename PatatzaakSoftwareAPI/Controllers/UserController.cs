@@ -22,6 +22,11 @@ public class UserController : ControllerBase
         return Ok(users);
     }
 
+    /// <summary>
+    /// Get a single user by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUser(int id)
     {

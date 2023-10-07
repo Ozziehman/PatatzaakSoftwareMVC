@@ -15,6 +15,7 @@ public class ItemController : ControllerBase
         _itemRepository = itemRepository;
     }
 
+
     // GET: api/Api
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Item>>> GetItems()
@@ -22,7 +23,12 @@ public class ItemController : ControllerBase
         var items = await _itemRepository.GetItemsAsync();
         return Ok(items);
     }
-
+    
+    /// <summary>
+    /// Get a single item by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     // GET: api/Api/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Item>> GetItem(int id)
