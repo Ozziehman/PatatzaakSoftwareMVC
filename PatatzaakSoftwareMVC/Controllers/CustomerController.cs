@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -82,12 +83,11 @@ namespace PatatzaakSoftwareMVC.Controllers
         public IActionResult PlaceOrder(int orderId, string voucherId)
         {
             var order = _context.orders.Find(orderId);
-            order.Status = "Placed";
             float totalPrice= 0;
             List<OrderedItem> orderedItemsInOrder = _context.orderedItems.Where(o => o.OrderId == orderId).ToList();
            
-            int result = _context.SaveChanges();
-            if (result > 0)
+
+            if (orderedItemsInOrder.Count() > 0)
             {
 
                 List<object> orderedItemInfoList = new List<object>();
@@ -120,7 +120,9 @@ namespace PatatzaakSoftwareMVC.Controllers
                 }
 
                 
+                //update the order with the total price and status
                 order.TotalPrice = (float)Math.Round((totalPrice), 2);
+                order.Status = "Placed";
 
                 //give the user points for each full euro they spent
                 var user = _context.users.Find(order.UserId);
@@ -128,24 +130,32 @@ namespace PatatzaakSoftwareMVC.Controllers
                 user.Points += (int)Math.Round(totalPrice);
                 
 
-                _context.SaveChanges();
-
-                var response = new
+                var result = _context.SaveChanges();
+                if(result > 0)
                 {
-                    success = true,
-                    message = $"Order placed and order status of order with Id {orderId} changed to 'Placed'",
-                    orderedItems = orderedItemInfoList,
-                    currentPoints = user.Points
-                };
-
-                return Json(response);
-
-           
+                    var response = new
+                    {
+                        success = true,
+                        message = $"Order placed and order status of order with Id {orderId} changed to 'Placed'",
+                        orderedItems = orderedItemInfoList,
+                        currentPoints = user.Points
+                    };
+                    return Json(response);
+                 }
+                else
+                {
+                    var response = new
+                    {
+                        success = false,
+                        message = $"Failed to place order OR order is duplicate"
+                    };
+                    return Json(response);
+                }    
             }
             else
             {
-                _logger.LogInformation($"Failed");
-                return Json(new { success = false, message = $"Failed to place order OR order is duplicate" });
+                _logger.LogInformation($"Failed, No ordered items are placed");
+                return Json(new { success = false, message = $"There are no items placed into the order" });
             }
         }
     }
