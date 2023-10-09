@@ -51,6 +51,10 @@ namespace PatatzaakSoftwareMVC.Controllers
             {
                 return Json(new { success = false, message = "Order not found" });
             }
+            //give the user points for each full euro they spent
+            var user = _context.users.Find(order.UserId);
+
+            user.Points += (int)Math.Round(order.TotalPrice);
 
             order.Status = "Completed";
             order.Finished = true;

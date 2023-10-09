@@ -83,8 +83,6 @@ function PlaceOrderButtonClicked(orderId) {
                 var menu = document.getElementById("menuColumn");
                 menu.style.display = "none";
 
-                var pointsDisplay = document.getElementById("pointsDisplay");
-                pointsDisplay.innerHTML = "Points: " + response.currentPoints;
             } else {
                 // The order placement was not successful
                 alert('Failed to place the order. Reason: ' + response.message);
