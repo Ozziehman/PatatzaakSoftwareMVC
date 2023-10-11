@@ -70,23 +70,29 @@ function PlaceOrderButtonClicked(orderId) {
         },
         success: function (response) {
             console.log(response);
-            var button = document.getElementById("placeOrderButton");
-            button.disabled = true;
-            button.style.display = "none";
 
-            var message = document.getElementById("messageDiv");
-            message.style.display = "block";
+            if (response.success) {
+                // The order was placed successfully
+                var button = document.getElementById("placeOrderButton");
+                button.disabled = true;
+                button.style.display = "none";
 
-            var menu = document.getElementById("menuColumn");
-            menu.style.display = "none";
+                var message = document.getElementById("messageDiv");
+                message.style.display = "block";
 
-            var pointsDisplay = document.getElementById("pointsDisplay");
-            pointsDisplay.innerHTML = "Points: " + response.currentPoints;
+                var menu = document.getElementById("menuColumn");
+                menu.style.display = "none";
 
+            } else {
+                // The order placement was not successful
+                alert('Failed to place the order. Reason: ' + response.message);
+            }
+        },
+        error: function (error) {
+            console.error("Error occurred:", error);
         }
     });
 }
-
 //Revert the status of an order to "Placed" AJAX
 function RevertToPlaced(orderId) {
     $.ajax({
