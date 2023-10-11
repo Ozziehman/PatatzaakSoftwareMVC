@@ -22,7 +22,7 @@ namespace PatatzaakSoftwareAPI
                 options.UseSqlServer(connectionString);
             });
 
-            // Register other services...
+            // Register services
             builder.Services.AddScoped<ItemRepository>();
             builder.Services.AddScoped<OrderRepository>();
             builder.Services.AddScoped<UserRepository>();
