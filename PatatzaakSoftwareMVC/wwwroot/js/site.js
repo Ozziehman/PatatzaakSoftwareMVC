@@ -83,6 +83,8 @@ function PlaceOrderButtonClicked(orderId) {
                 var menu = document.getElementById("menuColumn");
                 menu.style.display = "none";
 
+                var clearOrderButton = document.getElementById("clearOrderButton");
+                clearOrderButton.style.display = "none";
             } else {
                 // The order placement was not successful
                 alert('Failed to place the order. Reason: ' + response.message);
