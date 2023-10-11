@@ -148,5 +148,17 @@ namespace PatatzaakSoftwareMVC.Controllers
                 return Json(new { success = false, message = $"Failed to place order OR order is duplicate" });
             }
         }
+
+        public IActionResult ClearOrder(int orderId)
+        {
+            var order = _context.orders.Find(orderId);
+            var orderedItems = _context.orderedItems.Where(o => o.OrderId == orderId).ToList();
+            foreach (var orderedItem in orderedItems)
+            {
+                _context.orderedItems.Remove(orderedItem);
+            }
+            _context.SaveChanges();
+            return Json(new { success = true, message = "Order cleared" });
+        }   
     }
 }
