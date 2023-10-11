@@ -40,9 +40,12 @@ public class VoucherController : ControllerBase
         return Ok(voucher);
     }
 
-    //POST, PUT and DELETE have been disabled as this API is not intended to be used for CRUD operations just for reading data.
-
-   /* [HttpPost]
+    /// <summary>
+    /// creates a voucher
+    /// </summary>
+    /// <param name="voucher"></param>
+    /// <returns></returns>
+    [HttpPost]
     public async Task<ActionResult<Voucher>> PostVoucher(Voucher voucher)
     {
         if (!ModelState.IsValid)
@@ -54,6 +57,12 @@ public class VoucherController : ControllerBase
         return CreatedAtAction(nameof(GetVoucher), new { id = newVoucher.Id }, newVoucher);
     }
 
+    /// <summary>
+    /// Updates a voucher by id 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="voucher"></param>
+    /// <returns></returns>
     [HttpPut("{id}")]
     public async Task<IActionResult> PutVoucher(int id, Voucher voucher)
     {
@@ -79,6 +88,11 @@ public class VoucherController : ControllerBase
         return NoContent();
     }
 
+    /// <summary>
+    /// Deletes a voucher by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteVoucher(int id)
     {
@@ -90,5 +104,5 @@ public class VoucherController : ControllerBase
         }
 
         return NoContent();
-    }*/
+    }
 }

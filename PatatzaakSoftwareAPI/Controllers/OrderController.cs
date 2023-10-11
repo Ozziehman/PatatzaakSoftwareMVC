@@ -40,55 +40,69 @@ public class OrderController : ControllerBase
         return Ok(order);
     }
 
-    //POST, PUT and DELETE have been disabled as this API is not intended to be used for CRUD operations just for reading data.
+    /// <summary>
+    /// Creates an order
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<ActionResult<Order>> PostOrder(Order order)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
 
-    /* [HttpPost]
-     public async Task<ActionResult<Order>> PostOrder(Order order)
-     {
-         if (!ModelState.IsValid)
-         {
-             return BadRequest(ModelState);
-         }
+        var newOrder = await _orderRepository.AddOrderAsync(order);
+        return CreatedAtAction(nameof(GetOrder), new { id = newOrder.Id }, newOrder);
+    }
 
-         var newOrder = await _orderRepository.AddOrderAsync(order);
-         return CreatedAtAction(nameof(GetOrder), new { id = newOrder.Id }, newOrder);
-     }
+    /// <summary>
+    /// Update an order by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="order"></param>
+    /// <returns></returns>
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutOrder(int id, Order order)
+    {
+        if (id != order.Id)
+        {
+            return BadRequest();
+        }
 
-     [HttpPut("{id}")]
-     public async Task<IActionResult> PutOrder(int id, Order order)
-     {
-         if (id != order.Id)
-         {
-             return BadRequest();
-         }
+        var existingOrder = await _orderRepository.GetOrderByIdAsync(id);
 
-         var existingOrder = await _orderRepository.GetOrderByIdAsync(id);
+        if (existingOrder == null)
+        {
+            return NotFound();
+        }
 
-         if (existingOrder == null)
-         {
-             return NotFound();
-         }
+        var updatedOrder = await _orderRepository.UpdateOrderAsync(order);
 
-         var updatedOrder = await _orderRepository.UpdateOrderAsync(order);
+        if (updatedOrder == null)
+        {
+            return NotFound();
+        }
 
-         if (updatedOrder == null)
-         {
-             return NotFound();
-         }
+        return NoContent();
+    }
 
-         return NoContent();
-     }
+    /// <summary>
+    /// Delete an order by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteOrder(int id)
+    {
+        var result = await _orderRepository.DeleteOrderAsync(id);
 
-     [HttpDelete("{id}")]
-     public async Task<IActionResult> DeleteOrder(int id)
-     {
-         var result = await _orderRepository.DeleteOrderAsync(id);
+        if (!result)
+        {
+            return NotFound();
+        }
 
-         if (!result)
-         {
-             return NotFound();
-         }
-
-         return NoContent();
-     }*/
+        return NoContent();
+    }
 }

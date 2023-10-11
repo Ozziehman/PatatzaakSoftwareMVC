@@ -43,58 +43,72 @@ public class ItemController : ControllerBase
         return Ok(item);
     }
 
-    //POST, PUT and DELETE have been disabled as this API is not intended to be used for CRUD operations just for reading data.
+    // POST: api/Api
+    /// <summary>
+    /// Create an item
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<ActionResult<Item>> PostItem(Item item)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
 
-    /* // POST: api/Api
-     [HttpPost]
-     public async Task<ActionResult<Item>> PostItem(Item item)
-     {
-         if (!ModelState.IsValid)
-         {
-             return BadRequest(ModelState);
-         }
+        var newItem = await _itemRepository.AddItemAsync(item);
+        return CreatedAtAction(nameof(GetItem), new { id = newItem.Id }, newItem);
+    }
 
-         var newItem = await _itemRepository.AddItemAsync(item);
-         return CreatedAtAction(nameof(GetItem), new { id = newItem.Id }, newItem);
-     }
+    // PUT: api/Api/5
+    /// <summary>
+    /// Updates an item
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutItem(int id, Item item)
+    {
+        if (id != item.Id)
+        {
+            return BadRequest();
+        }
 
-     // PUT: api/Api/5
-     [HttpPut("{id}")]
-     public async Task<IActionResult> PutItem(int id, Item item)
-     {
-         if (id != item.Id)
-         {
-             return BadRequest();
-         }
+        var existingItem = await _itemRepository.GetItemByIdAsync(id);
 
-         var existingItem = await _itemRepository.GetItemByIdAsync(id);
+        if (existingItem == null)
+        {
+            return NotFound();
+        }
 
-         if (existingItem == null)
-         {
-             return NotFound();
-         }
+        var updatedItem = await _itemRepository.UpdateItemAsync(item);
 
-         var updatedItem = await _itemRepository.UpdateItemAsync(item);
+        if (updatedItem == null)
+        {
+            return NotFound();
+        }
 
-         if (updatedItem == null)
-         {
-             return NotFound();
-         }
+        return NoContent();
+    }
 
-         return NoContent();
-     }
+    // DELETE: api/Api/5
+    /// <summary>
+    /// Delete item by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteItem(int id)
+    {
+        var result = await _itemRepository.DeleteItemAsync(id);
 
-     // DELETE: api/Api/5
-     [HttpDelete("{id}")]
-     public async Task<IActionResult> DeleteItem(int id)
-     {
-         var result = await _itemRepository.DeleteItemAsync(id);
+        if (!result)
+        {
+            return NotFound();
+        }
 
-         if (!result)
-         {
-             return NotFound();
-         }
-
-         return NoContent();
-     }*/
+        return NoContent();
+    }
 }

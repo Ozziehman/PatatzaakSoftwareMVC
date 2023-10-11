@@ -40,42 +40,51 @@ public class OrderedItemController : ControllerBase
         return Ok(orderedItem);
     }
 
-    //POST, PUT and DELETE have been disabled as this API is not intended to be used for CRUD operations just for reading data.
-    /* [HttpPost]
-     public async Task<ActionResult<OrderedItem>> PostOrderedItem(OrderedItem orderedItem)
-     {
-         var newOrderedItem = await _orderedItemRepository.AddOrderedItemAsync(orderedItem);
-         return CreatedAtAction(nameof(GetOrderedItem), new { id = newOrderedItem.Id }, newOrderedItem);
-     }
+    /// <summary>
+    /// Creates an orderedItem
+    /// </summary>
+    /// <param name="orderedItem"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<ActionResult<OrderedItem>> PostOrderedItem(OrderedItem orderedItem)
+    {
+        var newOrderedItem = await _orderedItemRepository.AddOrderedItemAsync(orderedItem);
+        return CreatedAtAction(nameof(GetOrderedItem), new { id = newOrderedItem.Id }, newOrderedItem);
+    }
 
-     [HttpPut("{id}")]
-     public async Task<IActionResult> PutOrderedItem(int id, OrderedItem orderedItem)
-     {
-         if (id != orderedItem.Id)
-         {
-             return BadRequest();
-         }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutOrderedItem(int id, OrderedItem orderedItem)
+    {
+        if (id != orderedItem.Id)
+        {
+            return BadRequest();
+        }
 
-         var updatedOrderedItem = await _orderedItemRepository.UpdateOrderedItemAsync(orderedItem);
+        var updatedOrderedItem = await _orderedItemRepository.UpdateOrderedItemAsync(orderedItem);
 
-         if (updatedOrderedItem == null)
-         {
-             return NotFound();
-         }
+        if (updatedOrderedItem == null)
+        {
+            return NotFound();
+        }
 
-         return NoContent();
-     }
+        return NoContent();
+    }
 
-     [HttpDelete("{id}")]
-     public async Task<IActionResult> DeleteOrderedItem(int id)
-     {
-         var result = await _orderedItemRepository.DeleteOrderedItemAsync(id);
+    /// <summary>
+    /// Deletes an orderedItem by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteOrderedItem(int id)
+    {
+        var result = await _orderedItemRepository.DeleteOrderedItemAsync(id);
 
-         if (!result)
-         {
-             return NotFound();
-         }
+        if (!result)
+        {
+            return NotFound();
+        }
 
-         return NoContent();
-     }*/
+        return NoContent();
+    }
 }

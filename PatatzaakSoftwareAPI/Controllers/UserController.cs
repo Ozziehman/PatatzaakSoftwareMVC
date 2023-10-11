@@ -40,9 +40,12 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
-    //POST, PUT and DELETE have been disabled as this API is not intended to be used for CRUD operations just for reading data.
-
-    /*[HttpPost]
+    /// <summary>
+    /// Creates a user
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    [HttpPost]
     public async Task<ActionResult<User>> PostUser(User user)
     {
         if (!ModelState.IsValid)
@@ -54,6 +57,12 @@ public class UserController : ControllerBase
         return CreatedAtAction(nameof(GetUser), new { id = newUser.Id }, newUser);
     }
 
+    /// <summary>
+    /// Updates a user by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="user"></param>
+    /// <returns></returns>
     [HttpPut("{id}")]
     public async Task<IActionResult> PutUser(int id, User user)
     {
@@ -79,6 +88,11 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
+    /// <summary>
+    /// Delete a user by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
@@ -90,5 +104,5 @@ public class UserController : ControllerBase
         }
 
         return NoContent();
-    }*/
+    }
 }
