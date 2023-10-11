@@ -106,7 +106,8 @@ function ClearOrderButtonClicked(orderId) {
             console.log(response);
             var receipt = document.getElementById("receipt");
             receipt.innerHTML = null
-            totalPrice.innerHTML = 0;
+            totalPrice.innerHTML = "\u20AC" + 0;
+            totalPriceToDisplay = 0;
         }
     });
 }
