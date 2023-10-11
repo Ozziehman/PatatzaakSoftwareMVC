@@ -83,9 +83,9 @@ namespace PatatzaakSoftwareMVC.Controllers
         public IActionResult PlaceOrder(int orderId, string voucherId)
         {
             var order = _context.orders.Find(orderId);
-            float totalPrice= 0;
+            float totalPrice = 0;
             List<OrderedItem> orderedItemsInOrder = _context.orderedItems.Where(o => o.OrderId == orderId).ToList();
-           
+
 
             if (orderedItemsInOrder.Count() > 0)
             {
@@ -97,7 +97,7 @@ namespace PatatzaakSoftwareMVC.Controllers
                     var item = _context.items.Find(orderedItem.ItemId);
                     //add total price to the order to make it easier to know what the client has to pay
                     totalPrice += (float)Math.Round(item.Price - (item.Price * (item.Discount / 100)), 2);
-                    
+
                     orderedItemInfoList.Add(new //object
                     {
                         Id = item.Id,
@@ -114,21 +114,21 @@ namespace PatatzaakSoftwareMVC.Controllers
                         if (voucher.ExpiresBy > DateTime.Now)
                         {
                             totalPrice = (float)Math.Round(totalPrice - (totalPrice * (voucher.VoucherDiscount / 100)), 2);
-                            _context.vouchers.Remove(voucher);         
+                            _context.vouchers.Remove(voucher);
                         }
                     }
                 }
 
-                
+
                 //update the order with the total price and status
                 order.TotalPrice = (float)Math.Round((totalPrice), 2);
                 order.Status = "Placed";
 
-               
-                
+
+
 
                 var result = _context.SaveChanges();
-                if(result > 0)
+                if (result > 0)
                 {
                     var response = new
                     {
@@ -137,7 +137,7 @@ namespace PatatzaakSoftwareMVC.Controllers
                         orderedItems = orderedItemInfoList,
                     };
                     return Json(response);
-                 }
+                }
                 else
                 {
                     var response = new
@@ -146,12 +146,30 @@ namespace PatatzaakSoftwareMVC.Controllers
                         message = $"Failed to place order OR order is duplicate"
                     };
                     return Json(response);
-                }    
+                }
             }
             else
             {
                 _logger.LogInformation($"Failed, No ordered items are placed");
                 return Json(new { success = false, message = $"There are no items placed into the order" });
             }
+        }
+        
+        /// <summary>
+        /// Clears the order
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public IActionResult ClearOrder(int orderId)
+        {
+            var order = _context.orders.Find(orderId);
+            var orderedItems = _context.orderedItems.Where(o => o.OrderId == orderId).ToList();
+            foreach (var orderedItem in orderedItems)
+            {
+                _context.orderedItems.Remove(orderedItem);
+            }
+            _context.SaveChanges();
+            return Json(new { success = true, message = "Order cleared" });
+        }
     }
 }

@@ -93,6 +93,23 @@ function PlaceOrderButtonClicked(orderId) {
         }
     });
 }
+
+//clear the order AJAX
+function ClearOrderButtonClicked(orderId) {
+    $.ajax({
+        type: "POST",
+        url: '/Customer/ClearOrder',
+        data: {
+            orderId: orderId,
+        },
+        success: function (response) {
+            console.log(response);
+            var receipt = document.getElementById("receipt");
+            receipt.innerHTML = null
+            totalPrice.innerHTML = 0;
+        }
+    });
+}
 //Revert the status of an order to "Placed" AJAX
 function RevertToPlaced(orderId) {
     $.ajax({

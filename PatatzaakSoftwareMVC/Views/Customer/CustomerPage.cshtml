@@ -56,6 +56,9 @@
                     <option value="">Select a voucher</option>
                 </select>
                 <div class="col">
+                    <div class="btn" Id="clearOrderButton" onclick="ClearOrderButtonClicked('@sessionOrder.Id');">Clear Order</div>
+                </div>
+                <div class="col">
                     <div class="btn" Id="placeOrderButton" onclick="PlaceOrderButtonClicked('@sessionOrder.Id');">Place Order</div>
                 </div>
                 <div id="messageDiv" style="display: none" >
