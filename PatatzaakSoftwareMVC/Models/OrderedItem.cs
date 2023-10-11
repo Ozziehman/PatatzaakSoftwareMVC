@@ -19,53 +19,5 @@ namespace PatatzaakSoftwareMVC.Models
         [Required]
         public Order? Order { get; set; }
         public int OrderId { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //Old testing code with other DBContext method
-        /*public OrderedItem ConvertItemToOrderedItem(int itemId, int orderId)
-        {
-            
-            OrderedItem orderedItem = new OrderedItem();
-            using (var dbContext = new MainDb())
-
-            {
-                orderedItem.Item = dbContext.items.Where(i => i.Id == itemId).FirstOrDefault();
-                orderedItem.Order = dbContext.orders.Where(o => o.Id == orderId).FirstOrDefault();
-                dbContext.orderedItems.Add(orderedItem);
-                dbContext.SaveChanges();            
-                return orderedItem;
-            }
-        }*/
     }
 }
