@@ -87,23 +87,6 @@ function PlaceOrderButtonClicked(orderId) {
     });
 }
 
-function ClearOrderButtonClicked(orderId) {
-    $.ajax({
-        type: "POST",
-        url: '/Customer/ClearOrder',
-        data: {
-            orderId: orderId,
-        },
-        success: function (response) {
-            console.log(response);
-            var receipt = document.getElementById("receipt");
-            receipt.innerHTML = null
-
-        }
-    });
-}
-
-
 //Revert the status of an order to "Placed" AJAX
 function RevertToPlaced(orderId) {
     $.ajax({
