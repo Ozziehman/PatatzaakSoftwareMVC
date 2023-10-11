@@ -26,6 +26,7 @@ namespace PatatzaakSoftwareMVC.Controllers
         {
             User currentUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("User"));
             ViewBag.Orders = _context.orders.Where(o => o.UserId == currentUser.Id && o.Status == "Completed").ToList();
+            ViewBag.OrdersBeingMade = _context.orders.Where(o => o.UserId == currentUser.Id && o.Status == "Placed").ToList();
             return View("~/Views/Customer/OrderHistory.cshtml", new OrderHistoryViewModel(_context));
         }
 

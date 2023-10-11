@@ -1,29 +1,64 @@
 ﻿@model PatatzaakSoftwareMVC.Models.ViewModels.OrderHistoryViewModel
 @{
 	List<Order> orderList = ViewBag.Orders;
+    List<Order> ordersBeingMade = ViewBag.OrdersBeingMade;
 }
 
+<body style="background-image: url(https://images4.alphacoders.com/998/998705.jpg); background-size: cover">
+    <div class="row">
+    @* Orders currently being made/placed: *@
+        <div id="orderHistoryContainerHeader" class="col-md-4">
+            <div>
+                <h3 class="text-center">Currently placed orders </h3>
+                <hr />
+            </div>
+            <div id="orderHistoryContainer" class="justify-content-center">
+                @foreach (Order order in ordersBeingMade)
+                {
+                    <div class="col-md-5 text-center itemCol p-3" style="display:inline-block">
+                        <div class="dropdown" onmouseover="showDropdown('@order.Id')" onmouseout="hideDropdown('@order.Id')">
+                            <button class="btn order-btn">@order.Id</button>
+                            <div id="dropdownContent-@order.Id" class="dropdown-content">
+                                <p id="companyPageP">Order ID: @order.Id</p>
 
-<div>
-    <h3 class="text-center">Order history, click on order to re-order them</h3>
-    <hr />
-</div>
-<div class="row justify-content-center">
-    @foreach (Order order in orderList)
-    {
-        <div class="col-md-2 text-center itemCol p-2" style="display:inline-block">
-            <div class="dropdown" onmouseover="showDropdown('@order.Id')" onmouseout="hideDropdown('@order.Id')">
-                <button class="btn order-btn" onclick="RevertToPlaced('@order.Id')">@order.Id</button>
-                <div id="dropdownContent-@order.Id" class="dropdown-content">
-                    <p id="companyPageP">Order ID: @order.Id</p>
-
-                    @foreach (var item in Model.GetItemsForOrder(@order.Id))
-                    {
-                        <p id="dropdownP">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
-                    }
-                    <p id="companyPageP">Total Price: &#8364 @order.TotalPrice</p>
-                </div>
+                                @foreach (var item in Model.GetItemsForOrder(@order.Id))
+                                {
+                                    <p id="dropdownP">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
+                                }
+                                <p id="companyPageP">Total Price: &#8364 @order.TotalPrice</p>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
-    }
-</div>
+
+        @* previously completed orders: *@
+        <div id="orderHistoryContainerHeader" class="col-md-7">
+            <div>
+                <h3 class="text-center">Order history, click on order to re-order them</h3>
+                <hr />
+            </div>
+            <div id="orderHistoryContainer" class="justify-content-center">
+                @foreach (Order order in orderList)
+                {
+                    <div class="col-md-3 text-center itemCol p-3" style="display:inline-block">
+                        <div class="dropdown" onmouseover="showDropdown('@order.Id')" onmouseout="hideDropdown('@order.Id')">
+                            <button class="btn order-btn" onclick="RevertToPlaced('@order.Id')">@order.Id</button>
+                            <div id="dropdownContent-@order.Id" class="dropdown-content">
+                                <p id="companyPageP">Order ID: @order.Id</p>
+
+                                @foreach (var item in Model.GetItemsForOrder(@order.Id))
+                                {
+                                    <p id="dropdownP">@item.Name - &#8364; @(item.Price - (item.Price * (item.Discount / 100)))</p>
+                                }
+                                <p id="companyPageP">Total Price: &#8364 @order.TotalPrice</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</body>

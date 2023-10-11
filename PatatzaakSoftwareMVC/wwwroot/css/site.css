@@ -109,13 +109,21 @@ body {
 }
 
 #menuColumn {
+    text-align: center;
     max-height: 78vh;
     overflow-y: auto;
+    backdrop-filter: blur(40px);
+    border-radius: 5px;
 }
 
 #receipt {
     max-height: 60vh;
     overflow-y: auto;
+}
+
+#receiptColumn{
+    backdrop-filter: blur(40px);
+    border-radius: 5px;
 }
 
 /* Table styles */
@@ -284,6 +292,19 @@ td {
 #checkMark {
     max-width: 100px;
     max-height: 100px;
+}
+
+#orderHistoryContainer{
+    max-height: 75vh;
+    overflow-y: auto;
+    backdrop-filter: blur(40px);
+    border-radius: 5px;
+}
+
+#orderHistoryContainerHeader{
+    text-align: center;
+    color: black;
+
 }
 
 
