@@ -148,6 +148,8 @@ td {
 .homemessage {
     text-align: center;
     font-size: 20px;
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
 }
 
 .border-sect {
@@ -170,8 +172,16 @@ td {
     margin-right: 10px;
 }
 
-/* Voucher styles */
+#clearOrderButton {
+    margin-top: 10px;
+    background-color: darkred;
+}
 
+#placeOrderButton {
+    background-color: darkgreen;
+}
+
+/* Voucher styles */
 .voucher-container {
     text-align: center;
 }
@@ -201,14 +211,15 @@ td {
 }
 
 #btn30Percent {
-    background-color: #FF7F50;
+    
+    background-color: darkgoldenrod;
     width: 100%;
     height: 130px;
     color: white;
 }
 
 #btn40Percent {
-    background-color: #FFD700;
+    background-color: #FF7F50;
     width: 100%;
     height: 140px;
     color: white;
