@@ -43,7 +43,7 @@
                         @if (Context.Session.GetString("User") != null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index"><label class="navcomponent">Customer</label></a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index"><label class="navcomponent">Order</label></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="OrderHistory" asp-action="Index"><label class="navcomponent">Order History</label></a>
@@ -55,7 +55,7 @@
                             @if (user != null && user.IsAdmin)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action="Index"><label class="navcomponent">Company</label></a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action="Index"><label class="navcomponent">Order Overview</label></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index"><label class="navcomponent">OrderDetails</label></a>
