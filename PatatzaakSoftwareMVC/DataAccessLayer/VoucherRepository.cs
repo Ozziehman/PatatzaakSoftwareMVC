@@ -49,7 +49,14 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
         /// <returns></returns>
         public async Task<Voucher> UpdateVoucherAsync(Voucher voucher)
         {
-            _context.Entry(voucher).State = EntityState.Modified;
+            var voucherToUpdate = await _context.vouchers.FindAsync(voucher.Id);
+
+            voucherToUpdate.Price = voucher.Price;
+            voucherToUpdate.VoucherDiscount = voucher.VoucherDiscount;
+            voucherToUpdate.VoucherCode = voucher.VoucherCode;
+            voucherToUpdate.ExpiresBy = voucher.ExpiresBy;
+            voucherToUpdate.UserId = voucher.UserId;
+
             await _context.SaveChangesAsync();
             return voucher;
         }

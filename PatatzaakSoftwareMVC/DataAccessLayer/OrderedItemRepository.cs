@@ -47,7 +47,10 @@ public class OrderedItemRepository
     /// <returns></returns>
     public async Task<OrderedItem> UpdateOrderedItemAsync(OrderedItem orderedItem)
     {
-        _context.Entry(orderedItem).State = EntityState.Modified;
+        var orderedItemToUpdate = await _context.orderedItems.FindAsync(orderedItem.Id);
+        orderedItemToUpdate.ItemId = orderedItem.ItemId;
+        orderedItemToUpdate.OrderId = orderedItem.OrderId;
+
         await _context.SaveChangesAsync();
         return orderedItem;
     }

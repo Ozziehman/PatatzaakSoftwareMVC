@@ -52,7 +52,13 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
         /// <returns></returns>
         public async Task<Order> UpdateOrderAsync(Order order)
         {
-            _context.Entry(order).State = EntityState.Modified;
+            var orderToUpdate = await _context.orders.FindAsync(order.Id);
+            orderToUpdate.TotalPrice = order.TotalPrice;
+            orderToUpdate.TimePlaced = order.TimePlaced;
+            orderToUpdate.Finished = order.Finished;
+            orderToUpdate.Status = order.Status;
+            orderToUpdate.UserId = order.UserId;
+
             await _context.SaveChangesAsync();
             return order;
         }

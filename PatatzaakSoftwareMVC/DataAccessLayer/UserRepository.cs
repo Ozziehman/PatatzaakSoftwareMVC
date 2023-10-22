@@ -49,7 +49,14 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
         /// <returns></returns>
         public async Task<User> UpdateUserAsync(User user)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            var userToUpdate = await _context.users.FindAsync(user.Id);
+            userToUpdate.Name = user.Name;
+            userToUpdate.Email = user.Email;
+            userToUpdate.Password = user.Password;
+            userToUpdate.IsAdmin = user.IsAdmin;
+            userToUpdate.Points = user.Points;
+
+
             await _context.SaveChangesAsync();
             return user;
         }
