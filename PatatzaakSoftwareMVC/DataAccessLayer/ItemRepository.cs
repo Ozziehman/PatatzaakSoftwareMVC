@@ -47,7 +47,13 @@ namespace PatatzaakSoftwareMVC.DataAccessLayer
         /// <returns></returns>
         public async Task<Item> UpdateItemAsync(Item item)
         {
-            _context.Entry(item).State = EntityState.Modified;
+            var itemToUpdate = await _context.items.FindAsync(item.Id);
+
+            itemToUpdate.Name = item.Name;
+            itemToUpdate.Price = item.Price;
+            itemToUpdate.ImagePath = item.ImagePath;
+            itemToUpdate.Discount = item.Discount;
+
             await _context.SaveChangesAsync();
             return item;
         }
